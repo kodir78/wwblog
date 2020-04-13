@@ -70,12 +70,23 @@ class Post extends Model
     {
         return $query->orderBy('view_count', 'desc');
     }
+    
     // fungsi scope untuk manampilkan yang status publish
     public function scopePublished($query)
     {
         return $query->where("published_at", "<=", Carbon::Now());
     }
-    
+    // fungsi scope untuk manampilkan yang status draft jika field published_at > tgl sekarang
+    public function scopeScheduled($query)
+    {
+        return $query->where("published_at", ">", Carbon::Now());
+    }
+    // fungsi scope untuk manampilkan yang status draft jika field published_at kosong
+    public function scopeDraft($query)
+    {
+        return $query->where("published_at");
+    }
+        
     // fungsi input publishe_at jika dikosongkan berisi NULL
     public function setPublishedAtAttribute($value)
     {

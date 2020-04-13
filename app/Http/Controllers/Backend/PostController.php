@@ -30,42 +30,83 @@ class PostController extends BackendController
     */
     public function index(Request $request)
     {
-        // $onlyTrashed = FALSE;
+        $onlyTrashed = FALSE;
         $Pagetitle = "All Post";
         
         if (($status = $request->get('status')) && $status == 'trash') {
             # tampilkan table trash
             $filterKeyword = $request->get('keyword');
             $posts = Post::onlyTrashed()
-                ->with('category', 'author')
-                ->latest()
-                ->paginate($this->limit);
-            if($filterKeyword){
-                $posts = Post::where("title", "LIKE",
-                "%$filterKeyword%")
-                ->paginate($this->limit);
-            }
-            $postCount = Post::onlyTrashed()->count();
-            $onlyTrashed = TRUE;
-        } else {
-            # Tampilkan semua data aktif
-            $filterKeyword = $request->get('keyword');
-            $posts = Post::with('category', 'author')
+            ->with('category', 'author')
             ->latest()
             ->paginate($this->limit);
             if($filterKeyword){
                 $posts = Post::where("title", "LIKE",
-                "%$filterKeyword%")
-                ->paginate($this->limit);
+                "%$filterKeyword%")->paginate($this->limit);
+            }
+            $postCount = Post::onlyTrashed()->count();
+            $onlyTrashed = TRUE;
+        } 
+        elseif ($status == 'published') {
+            # Tampilkan semua data aktif
+            $filterKeyword = $request->get('keyword');
+            $posts = Post::published()->with('category', 'author')->latest()->paginate($this->limit);
+            if($filterKeyword){
+                $posts = Post::published()->where("title", "LIKE",
+                "%$filterKeyword%")->paginate($this->limit);
+            }
+            $postCount = Post::published()->count();
+            
+        }
+        elseif ($status == 'scheduled') {
+            # Tampilkan semua data aktif
+            $filterKeyword = $request->get('keyword');
+            $posts = Post::scheduled()->with('category', 'author')->latest()->paginate($this->limit);
+            if($filterKeyword){
+                $posts = Post::scheduled()->where("title", "LIKE",
+                "%$filterKeyword%")->paginate($this->limit);
+            }
+            $postCount = Post::scheduled()->count();
+            
+        }
+        elseif ($status == 'draft') {
+            # Tampilkan semua data aktif
+            $filterKeyword = $request->get('keyword');
+            $posts = Post::draft()->with('category', 'author')->latest()->paginate($this->limit);
+            if($filterKeyword){
+                $posts = Post::draft()->where("title", "LIKE",
+                "%$filterKeyword%")->paginate($this->limit);
+            }
+            $postCount = Post::draft()->count();
+            
+        }
+        else {
+            # Tampilkan semua data aktif
+            $filterKeyword = $request->get('keyword');
+            $posts = Post::with('category', 'author')->latest()->paginate($this->limit);
+            if($filterKeyword){
+                $posts = Post::where("title", "LIKE",
+                "%$filterKeyword%")->paginate($this->limit);
             }
             $postCount = Post::count();
-            $onlyTrashed = FALSE;
-
+            
         }
         
+        $statusList = $this->statusList($request);
+        return view('backend.adminlte.posts.index', compact('posts', 'postCount', 'Pagetitle', 'onlyTrashed', 'statusList'));
         
-        return view('backend.adminlte.posts.index', compact('posts', 'postCount', 'Pagetitle', 'onlyTrashed'));
-        
+    }
+
+    private function statusList($request)
+    {
+        return [
+            //'own'       => ($tmp = $request->user()->posts()) ? $tmp->count() : 0,
+            'all'       => Post::count(),
+            'published' => ($tmp = Post::published()) ? $tmp->count() : 0,
+            'scheduled' => ($tmp = Post::scheduled()) ? $tmp->count() : 0,
+            'draft'     => ($tmp = Post::draft()) ? $tmp->count() : 0,
+            'trash'     => ($tmp = Post::onlyTrashed()) ? $tmp->count() : 0,
+        ];
     }
     /**
     * Show the form for creating a new resource.
@@ -92,10 +133,11 @@ class PostController extends BackendController
         
         $data = $this->handleRequest($request);
         
-        $request->user()->posts()->create($data);
+        // agar dapat menyimpan tags ke database, tampung create post ke variabel $newpost
+        $newpost = $request->user()->posts()->create($data);
         
-        // simpan data ke posts_tags dengan "attach"
-        //$request->tags()->attach($request->tags);
+        // simpan data tags ke posts_tags dengan "attach"
+        $newpost->tags()->attach($request->tags);
         
         Alert::success('Post succesfully created', 'Create Success');
         return redirect()->route('posts.index')->with('message','Post succesfully created');
@@ -190,13 +232,20 @@ class PostController extends BackendController
             public function update(Requests\PostRequest $request, $id)
             {
                 $post = Post::findorfail($id);
+                //cek gambar lama
+                $oldImage = $post->image;
                 $data = $this->handleRequest($request);
                 // dd('post');
                 
+                $post->update($data);
+
                 // simpan data hasil edit ke posts_tags dengan "sync"
                 $post->tags()->sync($request->tags);
-                $post->update($data);
-                
+
+                // Jika gambar lama ada maka lakukan hapus gambar
+                if ($oldImage !== $post->image) {
+                    $this->removeImage($oldImage);
+                }
                 Alert::success('Post succesfully update', 'Create Success');
                 return redirect(route('posts.index'))->with('message','Post succesfully update');
             }
@@ -243,10 +292,29 @@ class PostController extends BackendController
                 // cara kedua
                 // $posts = Post::witTrashed()->where('id', $id)->first();
                 $posts->forceDelete();
+
+                // hapus file gambar
+                $this->removeImage($posts->image);
+
                 Alert::success('Post succesfully Delete Permanent', 'Delete Success');
                 
                 return redirect('/backend/posts?status=trash')->with('message', 'Post permanently deleted');
                 
+            }
+            
+            // fucntion remove image
+            private function removeImage($image)
+            {
+                if ( ! empty($image) )
+                {
+                    $imagePath     = $this->uploadPath . '/' . $image;
+                    $ext           = substr(strrchr($image, '.'), 1);
+                    $thumbnail     = str_replace(".{$ext}", "_thumb.{$ext}", $image);
+                    $thumbnailPath = $this->uploadPath . '/' . $thumbnail;
+                    
+                    if ( file_exists($imagePath) ) unlink($imagePath);
+                    if ( file_exists($thumbnailPath) ) unlink($thumbnailPath);
+                }
             }
             
         }

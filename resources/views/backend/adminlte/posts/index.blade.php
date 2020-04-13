@@ -39,9 +39,15 @@
                         <div class="card-header">
                             <a id="add-button" title="Add New" class="btn btn-success" href="{{ route('posts.create') }}"><i class="fa fa-plus-circle"></i> Add New</a>
                             &nbsp;&nbsp;&nbsp;
-                            <a href="?status=all">All</a> | 
-                            <a href="?status=trash">Trash</a>
-                            
+                            <?php $links = [] ?>
+                            @foreach($statusList as $key => $value)
+                                @if($value)
+                                    <?php $selected = Request::get('status') == $key ? 'selected-status' : '' ?>
+                                    <?php $links[] = "<a class=\"{$selected}\" href=\"?status={$key}\">" . ucwords($key) . "({$value})</a>" ?>
+                                @endif
+                            @endforeach
+                            {!! implode(' | ', $links) !!}
+
                             <div class="card-tools" style="padding:8px 0px">
                                 <form action="{{ route('posts.index') }}">
                                     <div class="input-group input-group-sm" style="width: 250px;">
