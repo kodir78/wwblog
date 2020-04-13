@@ -29,8 +29,7 @@
             </div>
         </div><!-- /.container-fluid -->
     </section>
-    @include('backend.adminlte.posts.message')
-
+    
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
@@ -39,55 +38,40 @@
                     <div class="card">
                         <div class="card-header">
                             <a id="add-button" title="Add New" class="btn btn-success" href="{{ route('posts.create') }}"><i class="fa fa-plus-circle"></i> Add New</a>
+                            &nbsp;&nbsp;&nbsp;
+                            <a href="?status=all">All</a> | 
+                            <a href="?status=trash">Trash</a>
                             
-                            <div class="card-tools">
-                                <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                                    
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                            <div class="card-tools" style="padding:8px 0px">
+                                <form action="{{ route('posts.index') }}">
+                                    <div class="input-group input-group-sm" style="width: 250px;">
+                                        <input type="text" name="keyword" class="form-control float-right" placeholder="Search">
+                                        
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
+                            
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive p-0">
                             
-                            
-                            <table class="table table-hover text-nowrap">
-                                <thead>
-                                    <tr>
-                                        <th>Action</th>
-                                        <th>Title</th>
-                                        <th>Author</th>
-                                        <th>Category</th>
-                                        <th>Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $request = request(); ?>
-                                    
-                                    @foreach ($posts as $post)
-                                    
-                                    <tr>
-                                        <td>
-                                            <a title="Edit" class="btn btn-xs btn-default edit-row" href="{{route('posts.edit', $post->id)}}">
-                                                <i class="fas fa-edit"></i>
-                                            </a>&nbsp;&nbsp;
-                                            <form  class="d-inline" action="{{route('posts.destroy', $post->id)}}" method="POST">
-                                                @csrf
-                                                @method('delete')
-                                                <button type="submit" class="btn btn-danger btn-xs delete-row"><i class="fas fa-trash-alt"></i></button>
-                                            </form>
-                                        </td>
-                                        <td>{{ $post->title }}</td>
-                                        <td>{{ $post->author->name }}</td>
-                                        <td>{{ $post->category->title }}</td>
-                                        <td><abbr title="{{ $post->dateFormatted(true) }}">{{ $post->dateFormatted() }}</abbr> | {!! $post->publicationLabel() !!}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                            @include('backend.adminlte.posts.message')
+
+                            @if (!$posts)
+                                <div class="alert alert-danger">
+                                    <strong>No record found</strong>
+                                </div>
+                            @else
+                                @if($onlyTrashed)
+                                    @include('backend.adminlte.posts.table-trash')
+                                @else
+                                    @include('backend.adminlte.posts.table')
+                                @endif
+                            @endif
+
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer clearfix">

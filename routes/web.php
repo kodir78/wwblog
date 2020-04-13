@@ -51,11 +51,20 @@ Auth::routes([
 Route::get('/home', 'Backend\HomeController@index')->name('home');
 
 //Route::get('/backend/posts/{post}/restore', 'Backend\PostController@restore')->name('posts.restore');
-//diubah ke method PUT    
+  
 Route::get('/backend/posts/{post}/restore', [
     'uses' => 'Backend\PostController@restore',
     'as' => 'posts.restore'
     ]);
+
+Route::delete('/backend/posts/{post}/kill', 'Backend\PostController@kill')->name('posts.kill');
+
+// Route::delete('/backend/posts/{post}/kill', [ 
+//     'use' => 'Backend\PostController@forcedestroy',
+//     'as'=>'posts.forcedestroy'
+// ]);
+ 
+
 Route::resource('/backend/posts', 'Backend\PostController');
 
 
@@ -70,7 +79,6 @@ Route::resource('/backend/posts', 'Backend\PostController');
     Route::get('/backend/posts/trash', 'Backend\PostController@trash')->name('posts.trash');
     
     
-    Route::delete('/backend/posts/{post}/delete_permanent', 'Backend\PostController@delete_permanent')->name('posts.delete_permanent');
     // Route::resource('/posts', 'PostController');
     Route::resource('/backend/pegawai', 'Backend\PegawaiController');
     Route::resource('/backend/sliders', 'Backend\SliderController');

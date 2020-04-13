@@ -15,7 +15,7 @@ use Intervention\Image\Facades\Image;
 
 class PostController extends BackendController
 {
-    protected $limit = 10;
+    protected $limit = 5;
     protected $uploadPath;
     
     public function __construct()
@@ -30,18 +30,41 @@ class PostController extends BackendController
     */
     public function index(Request $request)
     {
+        // $onlyTrashed = FALSE;
         $Pagetitle = "All Post";
-        $filterKeyword = $request->get('keyword');
-        $posts = Post::with('category', 'author')
-        ->latest()
-        ->paginate($this->limit);
-        if($filterKeyword){
-            $posts = Post::where("title", "LIKE",
-            "%$filterKeyword%")
+        
+        if (($status = $request->get('status')) && $status == 'trash') {
+            # tampilkan table trash
+            $filterKeyword = $request->get('keyword');
+            $posts = Post::onlyTrashed()
+                ->with('category', 'author')
+                ->latest()
+                ->paginate($this->limit);
+            if($filterKeyword){
+                $posts = Post::where("title", "LIKE",
+                "%$filterKeyword%")
+                ->paginate($this->limit);
+            }
+            $postCount = Post::onlyTrashed()->count();
+            $onlyTrashed = TRUE;
+        } else {
+            # Tampilkan semua data aktif
+            $filterKeyword = $request->get('keyword');
+            $posts = Post::with('category', 'author')
+            ->latest()
             ->paginate($this->limit);
+            if($filterKeyword){
+                $posts = Post::where("title", "LIKE",
+                "%$filterKeyword%")
+                ->paginate($this->limit);
+            }
+            $postCount = Post::count();
+            $onlyTrashed = FALSE;
+
         }
-        $postCount = Post::count();
-        return view('backend.adminlte.posts.index', compact('posts', 'postCount', 'Pagetitle'));
+        
+        
+        return view('backend.adminlte.posts.index', compact('posts', 'postCount', 'Pagetitle', 'onlyTrashed'));
         
     }
     /**
@@ -214,14 +237,15 @@ class PostController extends BackendController
                 }
             }
             
-            public function delete_permanent($id)
+            public function kill($id)
             {
                 $posts = Post::withTrashed()->findOrFail($id);
                 // cara kedua
                 // $posts = Post::witTrashed()->where('id', $id)->first();
                 $posts->forceDelete();
                 Alert::success('Post succesfully Delete Permanent', 'Delete Success');
-                return redirect()->route('posts.trash')->with('message', 'Post permanently deleted');
+                
+                return redirect('/backend/posts?status=trash')->with('message', 'Post permanently deleted');
                 
             }
             
