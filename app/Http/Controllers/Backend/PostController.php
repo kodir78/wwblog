@@ -41,7 +41,7 @@ class PostController extends BackendController
             ->paginate($this->limit);
         }
         $postCount = Post::count();
-        return view('backend.posts.index', compact('posts', 'postCount', 'Pagetitle'));
+        return view('backend.adminlte.posts.index', compact('posts', 'postCount', 'Pagetitle'));
         
     }
     /**
@@ -54,7 +54,7 @@ class PostController extends BackendController
         $Pagetitle = "Create Post";
         $tags = Tag::all();
         $category = Category::all();
-        return view('backend.posts.create', compact('category','tags','Pagetitle'));
+        return view('backend.adminlte.posts.create', compact('category','tags','Pagetitle'));
     }
     
     /**
@@ -68,6 +68,11 @@ class PostController extends BackendController
         // Validation rule Dipindahkan ke file App\HTTP\Request\PostRequest
         
             $data = $this->handleRequest($request);
+        
+            // Menyimpan tags ke table tags
+            //$post->tags()->attach($tag->id);
+            
+            //$request->posts()->tags()->create($data);
 
             $request->user()->posts()->create($data);
 
@@ -83,8 +88,8 @@ class PostController extends BackendController
         if ($request->has('image')) {
             # upload with image
             $image = $request->file('image');
-            $fileName = $image->getClientOriginalName();
-            //$fileName = time().$image->getClientOriginalName();
+            //$fileName = $image->getClientOriginalName();
+            $fileName = time().$image->getClientOriginalName();
             $destination = $this->uploadPath;
 
             $successUploaded = $image->move($destination, $fileName);
@@ -150,7 +155,7 @@ class PostController extends BackendController
                 $tags = Tag::all();
                 $category = Category::all();
                 $post = Post::findOrFail($id);
-                return view('backend.posts.edit', compact('post','category','tags', 'Pagetitle'));
+                return view('backend.adminlte.posts.edit', compact('post','category','tags', 'Pagetitle'));
             }
             
             
@@ -166,6 +171,8 @@ class PostController extends BackendController
                     $post = Post::findorfail($id);
                     $data = $this->handleRequest($request);
                     // dd('post');
+                    // simpan data hasil edit ke posts_tags dengan "sync"
+                    $post->tags()->sync($request->tags);
                     $post->update($data);
 
 
@@ -201,8 +208,8 @@ class PostController extends BackendController
                     //         'updated_by' => Auth::id()
                     //     ];
                     // }
-                    // // simpan data hasil edit ke posts_tags dengan "sync"
-                    // // $post->tags()->sync($request->tags);
+                    // simpan data hasil edit ke posts_tags dengan "sync"
+                    // $post->tags()->sync($request->tags);
                     // $post->update($post_data);
                     
                     Alert::success('Post succesfully update', 'Create Success');

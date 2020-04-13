@@ -43,7 +43,7 @@
                                 <h5><a href="{{ route('blog.show', $post->slug) }}">{{ $post->title}}</a></h5>
                                 {!!  substr(strip_tags($post->excerpt), 0, 150) !!}
                                 <div class="events-view-btn mt-10">
-                                    <a href=""{{ route('blog.show', $post->slug) }}">Detail</a>
+                                    <a href="{{ route('blog.show', $post->slug) }}">Detail</a>
                                 </div>
                             </div>
                         </div>

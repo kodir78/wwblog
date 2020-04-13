@@ -33,7 +33,7 @@ class PostRequest extends FormRequest
             "category_id" => "required",
             "excerpt" => "required",
             "body" => "required",
-            "published_at" => "required|date_format:Y-m-d H:i:s",
+            //"published_at" => "date_format:Y-m-d H:i:s",
             "image" => "mimes:jpg,jpeg,bmp,png",
         ];
 

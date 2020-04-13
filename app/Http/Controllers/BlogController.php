@@ -53,6 +53,7 @@ class BlogController extends Controller
         //                 ->published()
         //                 ->get();
         // Menghitung jumlah pembaca, hal ini setiap browser di refresh maka akan bertambah, sebaiknya gunakan cara sessin atau catat ip address
+              
         $post->increment('view_count');
         return view('frontend.sikka.show', compact('post'));
     }

@@ -14,10 +14,10 @@ class Tag extends Model
     ];
 
     public function users(){
-    	return $this->belongsTo('App\User');
+    	return $this->belongsTo(User::class);
     }
 
     public function posts(){
-    	return $this->belongsToMany('App\Post');
+    	return $this->belongsToMany(Post::class);
     }
 }

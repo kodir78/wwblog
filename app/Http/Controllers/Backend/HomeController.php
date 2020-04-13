@@ -16,6 +16,6 @@ class HomeController extends BackendController
     {
         //Alert::success('Welcome', 'Login Success');
         // return view('backend.stisla.dashboard');
-        return view('backend.stisla.dashboard');
+        return view('backend.adminlte.dashboard');
     }
 }
