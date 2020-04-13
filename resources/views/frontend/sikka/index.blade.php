@@ -7,12 +7,13 @@
     <div class="slider-active">
         @foreach ($sliders as $slider)
         @if ($slider->imageurl)
-           {{-- menggunakan imageUrl --}}
-            <div class="single-slider slider-height d-flex align-items-center justify-content-center" style="background-image: url({{ $slider->imageurl }});"> 
-        @endif
+        {{-- menggunakan imageUrl --}}
+        <div class="single-slider slider-height d-flex align-items-center justify-content-center" style="background-image: url({{ $slider->imageurl }});"> 
+            @endif
         </div>
         @endforeach
     </div>
+</div>
 <!-- slider-end -->
 <!-- latest_blog start -->
 <div class="course-details-area gray-bg pt-100 pb-70">
@@ -66,7 +67,7 @@
         </div>
     </div>
 </div>
-        <!-- latest_blog end -->
-       
-        @endsection
-        <!-- footer start -->
+<!-- latest_blog end -->
+
+@endsection
+<!-- footer start -->

@@ -49,7 +49,15 @@ Auth::routes([
     'register' => false,
 ]);
 Route::get('/home', 'Backend\HomeController@index')->name('home');
+
+//Route::get('/backend/posts/{post}/restore', 'Backend\PostController@restore')->name('posts.restore');
+//diubah ke method PUT    
+Route::get('/backend/posts/{post}/restore', [
+    'uses' => 'Backend\PostController@restore',
+    'as' => 'posts.restore'
+    ]);
 Route::resource('/backend/posts', 'Backend\PostController');
+
 
 // Route::group(['middleware' => 'auth'], function()
 // {});
@@ -60,7 +68,8 @@ Route::resource('/backend/posts', 'Backend\PostController');
     Route::resource('/backend/categories', 'Backend\CategoryController');
     Route::resource('/backend/tags', 'Backend\TagsController');
     Route::get('/backend/posts/trash', 'Backend\PostController@trash')->name('posts.trash');
-    Route::get('/backend/posts/{post}/restore', 'Backend\PostController@restore')->name('posts.restore');
+    
+    
     Route::delete('/backend/posts/{post}/delete_permanent', 'Backend\PostController@delete_permanent')->name('posts.delete_permanent');
     // Route::resource('/posts', 'PostController');
     Route::resource('/backend/pegawai', 'Backend\PegawaiController');

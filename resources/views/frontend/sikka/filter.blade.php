@@ -5,7 +5,7 @@
 <!-- slider-start -->
 <div class="slider-area">
     <div class="page-title">
-        <div class="single-slider slider-height slider-height-breadcrumb d-flex align-items-center" style="background-image: url({{ asset('public/assets/frontend/sikka/img/bg/others_bg.jpg') }});">
+        <div class="single-slider slider-height slider-height-breadcrumb d-flex align-items-center" style="background-image: url(/assets/frontend/sikka/img/bg/others_bg.jpg);">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
