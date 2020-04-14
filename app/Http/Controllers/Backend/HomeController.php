@@ -14,8 +14,10 @@ class HomeController extends BackendController
      */
     public function index()
     {
+        $a = 34;
+
         //Alert::success('Welcome', 'Login Success');
         // return view('backend.stisla.dashboard');
-        return view('backend.adminlte.dashboard');
+        return view('backend.adminlte.dashboard', compact('a'));
     }
 }

@@ -3,11 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
-    use softDeletes;
+    // dicategory tidak menggunakan softdelete
+   // use softDeletes;
     
     protected $table = 'categories';
     protected $fillable = [

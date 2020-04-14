@@ -4,6 +4,7 @@ namespace App\Views\Composers;
 use Illuminate\View\View;
 use App\Category;
 use App\Post;
+use App\Tag;
 
 class NavigationComposer
 {

@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Backend;
-use App\Category;
-use Auth;
-use RealRashid\SweetAlert\Facades\Alert;
-use Illuminate\Support\Str;
+
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests;
+
+use App\Category;
+use App\Post;
 
 class CategoryController extends BackendController
 {
@@ -14,18 +16,13 @@ class CategoryController extends BackendController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $filterKeyword = $request->get('keyword');
-        $categories = \App\Category::paginate(2);
-        if($filterKeyword){
-            $categories = \App\Category::where("title", "LIKE",
-            "%$filterKeyword%")
-            ->paginate(2);
-        }
-        $categoryCount = Category::count();
-        return view('backend.categories.index', compact('categories', 'categoryCount'));
-
+        $Pagetitle = "All Category";
+        // untuk memperbaiki query gunakan igger loading dengan menabahkan with
+        $categories = Category::with('posts')->orderBy('title')->paginate($this->limit);
+        $categoriesCount = Category::count();
+        return view('backend.adminlte.categories.index', compact('categories', 'categoriesCount', 'Pagetitle'));
     }
 
     /**
@@ -35,8 +32,8 @@ class CategoryController extends BackendController
      */
     public function create()
     {
-        //
-        return view('backend.categories.create');
+        $categories = new Category();
+        return view('backend.adminlte.categories.create', compact('categories'));
     }
 
     /**
@@ -45,27 +42,10 @@ class CategoryController extends BackendController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Requests\CategoriesStoreRequest $request)
     {
-        $this->validate($request, [
-            "title" => "required|min:5|max:100",
-            "image" => "required",
-            ]);
-            
-            $image = $request->image;
-            $new_image = time().$image->getClientOriginalName();
-            
-            $category = Category::create([
-                'title' => $request->title,
-                'image' => $new_image,
-                'slug' => Str::slug($request->title),
-                'created_by' => Auth::id()
-                ]);
-                
-                $image->move('uploads/images/category/', $new_image);
-                Alert::success('Category succesfully created', 'Create Success');
-                return redirect()->route('categories.index');
-                // return redirect()->back()->with('success','Ketegori berhasil disimpan');
+        Category::create($request->all());
+        return redirect('/backend/categories')->with('message','New Category was created successfully');
 
     }
 
@@ -88,8 +68,8 @@ class CategoryController extends BackendController
      */
     public function edit($id)
     {
-        $category = \App\Category::findOrFail($id);
-        return view('backend.categories.edit', compact('category'));
+        $categories = Category::findOrFail($id);
+        return view('backend.adminlte.categories.edit', compact('categories'));
     }
 
     /**
@@ -99,39 +79,10 @@ class CategoryController extends BackendController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Requests\CategoriesUpdateRequest $request, $id)
     {
-        $this->validate($request, [
-            "title" => "required|min:5|max:100",
-            ]);
-            
-            $category = Category::findorfail($id);
-            
-            if ($request->has('image')){
-                $image = $request->image;
-                $new_image = time().$image->getClientOriginalName();
-                $image->move('uploads/images/category/', $new_image);
-                
-                $category_data = [
-                    'title' => $request->title,
-                    'image' => $new_image,
-                    'slug' => Str::slug($request->title),
-                    'status' => $request->status,
-                    'updated_by' => Auth::id()
-                ];
-            }
-            else{
-                $category_data = [
-                    'title' => $request->title,
-                    'slug' => Str::slug($request->title),
-                    'status' => $request->status,
-                    'updated_by' => Auth::id()
-                ];
-            }
-            $category->update($category_data);
-            
-            Alert::success('Category succesfully update', 'Update Success');
-            return redirect()->route('categories.index');
+        Category::findOrFail($id)->update($request->all());
+        return redirect('/backend/categories')->with('message','Category was update successfully');
     }
 
     /**
@@ -140,12 +91,14 @@ class CategoryController extends BackendController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Requests\CategoryDestroyRequest $request, $id)
     {
-        $category = Category::findOrfail($id);
-        $category->deleted_by = Auth::id();
-        $category->delete();
-        Alert::success('Category succesfully delete', 'Delete Success');
-        return redirect()->back();
+        // update semua id category ke uncotegorized untuk semua tulisan yang kctegorynya dihapus belum berfungsi
+        // Post::withTrashed()->where('category_id', $id)->update(['category_id' => config('cms.default_category_id')]);
+        
+        $categories = Category::findOrfail($id)->delete();
+                //$categories->delete();
+                // Alert::success('Post succesfully Trash', 'Delete Success');
+                return redirect()->back()->with('message', 'Your Categories Was Deleted');
     }
 }

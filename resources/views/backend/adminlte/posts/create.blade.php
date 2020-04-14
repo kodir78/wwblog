@@ -50,7 +50,7 @@
         <div class="row">
           
           <div class="col-md-9">
-            <div class="card card-primary">
+            <div class="card card-secondary">
               <div class="card-header">
                 <h3 class="card-title">Write Your Post</h3>
               </div>
@@ -123,7 +123,7 @@
           <!-- /.col (left) -->
           <div class="col-md-3">
             <!-- Category -->
-            <div class="card card-success">
+            <div class="card card-secondary">
               <div class="card-header">
                 <h3 class="card-title">Category</h3>
               </div>
@@ -158,7 +158,7 @@
               <div class="card-body">
                 <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                   <div class="fileinput-new img-thumbnail" style="width: 200px; height: 150px;">
-                    <img src="/assets/backend/adminlte/dist/img/download.svg"  alt="...">
+                    <img src="/assets/backend/adminlte/dist/img/no_image.png"  alt="...">
                   </div>
                   <div class="fileinput-preview fileinput-exists img-thumbnail" style="max-width: 200px; max-height: 150px;"></div>
                   <div>

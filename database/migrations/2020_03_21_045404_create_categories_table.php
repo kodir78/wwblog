@@ -17,13 +17,6 @@ class CreateCategoriesTable extends Migration
             $table->bigIncrements('id');
             $table->string("title");
             $table->string("slug")->unique();
-            $table->enum("status", ["ACTIVE", "INACTIVE"]);
-            $table->string("image")->comment("berisi nama file image saja tanpa path");
-            $table->bigInteger("sidebar")->nullable();;
-            $table->bigInteger("created_by");
-            $table->bigInteger("updated_by")->nullable();
-            $table->bigInteger("deleted_by")->nullable();
-            $table->softDeletes();
             $table->timestamps();
         });
     }

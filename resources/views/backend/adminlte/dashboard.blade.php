@@ -43,10 +43,19 @@
         </div>
       </div>
       <div class="card-body">
-        Start creating your amazing application! <br>
+        Start creating your amazing application! <br><br>
+        
+        Coba if <br><br>
+
+        @if ($a == 3)
+            Oke
+        @else
+            Lanjut
+        @endif
+        <br><br>
         <div class="fileinput fileinput-new" data-provides="fileinput">
           <div class="fileinput-new img-thumbnail" style="width: 200px; height: 150px;">
-            <img src="/assets/backend/adminlte/dist/img/download.svg"  alt="...">
+            <img src="/assets/backend/adminlte/dist/img/no_image.png"  alt="...">
           </div>
           <div class="fileinput-preview fileinput-exists img-thumbnail" style="max-width: 200px; max-height: 150px;"></div>
           <div>

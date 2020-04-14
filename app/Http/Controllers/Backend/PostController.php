@@ -15,7 +15,7 @@ use Intervention\Image\Facades\Image;
 
 class PostController extends BackendController
 {
-    protected $limit = 5;
+    
     protected $uploadPath;
     
     public function __construct()
@@ -278,7 +278,7 @@ class PostController extends BackendController
                     # code...
                     $posts->restore();
                     Alert::success('Post succesfully Restore', 'Delete Success');
-                    return redirect()->route('posts.index')->with('message','Post successfuly Restored');
+                    return  redirect()->back()->with('message','Post successfuly Restored');
                 } else {
                     # code...
                     Alert::success('Post is not in trash', 'Delete Success');

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\User;
-use App\Tags;
+use App\Tag;
 use App\Category;
 use App\Slider;
 use Illuminate\Support\Str;
@@ -17,6 +17,7 @@ class BlogController extends Controller
     public function index(Post $posts)
     {
         $sliders = Slider::all();
+        $tags = Tag::all();
         // \DB::enableQueryLog();
         $posts = Post::with('author')
                 ->latestFirst()
@@ -24,7 +25,7 @@ class BlogController extends Controller
                 ->take(6)
                 ->paginate($this->limit);
                 //->get();
-       return view('frontend.sikka.index', compact('posts', 'sliders'));
+       return view('frontend.sikka.index', compact('posts', 'sliders', 'tags'));
         // dd(\DB::getQueryLog());
     }
 
@@ -32,7 +33,7 @@ class BlogController extends Controller
     {
         $title = "Kategori";
         $categoryName = $category->title;
-
+        $tags = Tag::all();
         $posts = $category->posts()
                           ->latestFirst()
                           ->published()
@@ -46,8 +47,9 @@ class BlogController extends Controller
     public function show(Post $post)
     {
         $title = "Detail Post";
-        
-        //Kategori sasidipindah ke provider
+        $tags = Tag::all();
+        //Kategori sasi dipindah ke provider
+        //bagaimana caranya Tags dipindah ke provider
         // $posts = Post::where('slug', $slug)
         //                 ->first()
         //                 ->published()
@@ -55,7 +57,7 @@ class BlogController extends Controller
         // Menghitung jumlah pembaca, hal ini setiap browser di refresh maka akan bertambah, sebaiknya gunakan cara sessin atau catat ip address
               
         $post->increment('view_count');
-        return view('frontend.sikka.show', compact('post'));
+        return view('frontend.sikka.show', compact('post', 'tags'));
     }
     
        // list berdasrkan author belum selesai
@@ -63,7 +65,7 @@ class BlogController extends Controller
     {
         $title = "Filter Penulis";
         $categoryName = $author->name;
-
+        $tags = Tag::all();
         $posts = $author->posts()
                           ->latestFirst()
                           ->published()
@@ -78,6 +80,7 @@ class BlogController extends Controller
     public function search(request $request)
     {
         $title = "Hasil Pencarian";
+        $tags = Tag::all();
         $categories = Category::all();
         $filterKeyword = $request->get('keyword');
         $posts = \App\Post::with('category', 'author')

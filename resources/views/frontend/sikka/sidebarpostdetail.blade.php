@@ -50,36 +50,20 @@
             </div>
         </div>
         <div class="widget mb-40 widget-padding white-bg">
-            <h4 class="widget-title">Topik</h4>
+            <h4 class="widget-title">Tags</h4>
             <div class="widget-tags clearfix">
                 <ul class="sidebar-tad clearfix">
+                    @foreach ($tags as $tag)
                     <li>
-                        <a href="#">CSE</a>
-                    </li>
-                    <li>
-                        <a href="#">Business</a>
-                    </li>
-                    <li>
-                        <a href="#">Study</a>
-                    </li>
-                    <li>
-                        <a href="#">English</a>
-                    </li>
-                    <li>
-                        <a href="#">Education</a>
-                    </li>
-                    <li>
-                        <a href="#">Engineering</a>
-                    </li>
-                    <li>
-                        <a href="#">Advisor</a>
-                    </li>
+                        <a href="#">{{ $tag->title }}</a>
+                    </li> 
+                    @endforeach
                 </ul>
             </div>
         </div>
         <div class="widget mb-40 widget-padding banner-padding white-bg">
             <div class="banner-thumb pos-relative">
-                <img src="{{asset('public/assets/frontend/sikka/img/courses/course_banner_01.png')}}" alt="">
+                <img src="/assets/frontend/sikka/img/courses/course_banner_01.png" alt="">
                 <div class="bannger-text">
                     <h2>New eBook are availablei our shop</h2>
                     <div class="banner-btn">
