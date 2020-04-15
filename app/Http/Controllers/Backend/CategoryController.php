@@ -19,10 +19,11 @@ class CategoryController extends BackendController
     public function index()
     {
         $Pagetitle = "All Category";
+        $category_id = $this->defaultcategory_id;
         // untuk memperbaiki query gunakan igger loading dengan menabahkan with
         $categories = Category::with('posts')->orderBy('title')->paginate($this->limit);
         $categoriesCount = Category::count();
-        return view('backend.adminlte.categories.index', compact('categories', 'categoriesCount', 'Pagetitle'));
+        return view('backend.adminlte.categories.index', compact('categories', 'categoriesCount', 'Pagetitle', 'category_id'));
     }
 
     /**
@@ -91,14 +92,18 @@ class CategoryController extends BackendController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Requests\CategoryDestroyRequest $request, $id)
+    public function destroy($id)
     {
-        // update semua id category ke uncotegorized untuk semua tulisan yang kctegorynya dihapus belum berfungsi
+        // menggunaakan cara ini belum berhasil
         // Post::withTrashed()->where('category_id', $id)->update(['category_id' => config('cms.default_category_id')]);
         
-        $categories = Category::findOrfail($id)->delete();
-                //$categories->delete();
-                // Alert::success('Post succesfully Trash', 'Delete Success');
-                return redirect()->back()->with('message', 'Your Categories Was Deleted');
+        // update semua id category ke uncotegorized untuk semua tulisan yang kctegorynya dihapus belum berfungsi
+        $category_id = $this->defaultcategory_id;
+        Post::withTrashed()->where('category_id', $id)->update(['category_id' => $category_id]);
+        
+        $categories = Category::findOrfail($id);
+        $categories->delete();
+        // Alert::success('Post succesfully Trash', 'Delete Success');
+        return redirect()->back()->with('message', 'Your Categories Was Deleted');
     }
 }

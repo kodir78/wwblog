@@ -2,24 +2,26 @@
     <thead>
         <tr>
             <th>Action</th>
-            <th>Category Name</th>
+            <th>User Name</th>
+            <th>Email</th>
+            <th>Role</th>
             <th>Post Count</th>
         </tr>
     </thead>
     <tbody>
         
-        @foreach ($categories as $category)
+        @foreach ($users as $user)
         
         <tr>
             <td>
-                <a title="Edit" class="btn btn-xs btn-default edit-row" href="{{route('categories.edit', $category->id)}}">
+                <a title="Edit" class="btn btn-xs btn-default edit-row" href="{{route('users.edit', $user->id)}}">
                     <i class="fas fa-edit"></i>
                 </a>&nbsp;&nbsp;
-                <form  class="d-inline" action="{{route('categories.destroy', $category->id)}}" method="POST">
+                <form  class="d-inline" action="{{route('users.destroy', $user->id)}}" method="POST">
                     @csrf
                     @method('delete')
-                    {{-- @if($category->id == config('cms.default_category_id')) --}}
-                    @if($category->id == $category_id)
+                    @if($user->id == config('cms.default_user_id'))
+                    {{-- @if($user->id == 1) --}}
                     <button onclick="return false" type="submit" class="btn btn-xs btn-danger disabled">
                         <i class="fa fa-times"></i>
                     </button>
@@ -30,8 +32,10 @@
                     @endif 
                 </form>
             </td>
-            <td>{{ $category->title }}</td>
-            <td>{{ $category->posts->count() }}</td>
+            <td>{{ $user->name }}</td>
+            <td>{{ $user->email }}</td>
+            <td>{{ $default_id }}</td>
+            <td>{{ $user->posts->count() }}</td>
         </tr>
         @endforeach
     </tbody>

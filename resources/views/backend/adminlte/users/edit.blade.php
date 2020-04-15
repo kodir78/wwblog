@@ -1,5 +1,5 @@
 @extends('backend.adminlte.layouts.main')
-@section("title") Create Category @endsection
+@section("title") Edit Category @endsection
 @section('styles')
 <!-- Start styles Libraies -->
 
@@ -15,14 +15,14 @@
         <div class="col-sm-6">
           <h1>
             Category
-            <small>Create Category</small>
+            <small>Edit Category</small>
           </h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ url('/home') }}">Dashboard</a></li>
             <li class="breadcrumb-item"><a href="{{ route('categories.index') }}">Post</a></li>
-            <li class="breadcrumb-item active">Create Category</li>
+            <li class="breadcrumb-item active">Edit Category</li>
           </ol>
         </div>
       </div>
@@ -32,8 +32,9 @@
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
-      <form id="post-form" enctype="multipart/form-data" class="bg-white shadow-sm p-3" action="{{route('categories.store')}}" method="POST">
+      <form id="post-form" enctype="multipart/form-data" class="bg-white shadow-sm p-3" action="{{route('categories.update', $categories->id)}}" method="POST">
         @csrf
+        @method('PUT')
         <div class="row">
           
           <div class="col-md-12">
@@ -45,7 +46,7 @@
                 <!-- text input -->
                 <div class="form-group">
                   <label for="title">Title</label>
-                  <input id="title" name="title" type="text" class="form-control @error('title') is-invalid @enderror" placeholder="Title">
+                  <input id="title" value="{{old('title') ? old('title') : $categories->title}}" name="title" type="text" class="form-control @error('title') is-invalid @enderror" placeholder="Title">
                   @error('title')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -56,7 +57,7 @@
                 <!-- text input -->
                 <div class="form-group">
                   <label for="slug">Slug</label>
-                  <input id="slug" name="slug" type="text" class="form-control @error('slug') is-invalid @enderror" readonly>
+                  <input id="slug" value="{{old('slug') ? old('slug') : $categories->slug}}" name="slug" type="text" class="form-control @error('slug') is-invalid @enderror" readonly>
                   @error('slug')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -68,7 +69,7 @@
               </div>
               <!-- /.card-body -->
               <div class="card-footer float-left">
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary">Update</button>
                 <a href="{{ route('categories.index') }}" class="btn btn-info">Cancel</a>&nbsp;&nbsp;
               </div>
             </div>

@@ -13,6 +13,7 @@ class CategoryDestroyRequest extends FormRequest
      */
     public function authorize()
     {
+        // belum dapat difungsikan
         // function jika id yang akan dihapus adalah id defult maka tampikan forbiden
         return !($this->route('category') == config('cms.default_category_id'));
         
