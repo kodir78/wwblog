@@ -19,7 +19,7 @@ class CategoryController extends BackendController
     public function index()
     {
         $Pagetitle = "All Category";
-        $category_id = $this->defaultcategory_id;
+        
         // untuk memperbaiki query gunakan igger loading dengan menabahkan with
         $categories = Category::with('posts')->orderBy('title')->paginate($this->limit);
         $categoriesCount = Category::count();
@@ -43,7 +43,7 @@ class CategoryController extends BackendController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Requests\CategoriesStoreRequest $request)
+    public function store(Requests\CategoryStoreRequest $request)
     {
         Category::create($request->all());
         return redirect('/backend/categories')->with('message','New Category was created successfully');
@@ -80,7 +80,7 @@ class CategoryController extends BackendController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Requests\CategoriesUpdateRequest $request, $id)
+    public function update(Requests\CategoryUpdateRequest $request, $id)
     {
         Category::findOrFail($id)->update($request->all());
         return redirect('/backend/categories')->with('message','Category was update successfully');
@@ -92,14 +92,14 @@ class CategoryController extends BackendController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Requests\CategoryDestroyRequest $request,$id)
     {
-        // menggunaakan cara ini belum berhasil
-        // Post::withTrashed()->where('category_id', $id)->update(['category_id' => config('cms.default_category_id')]);
+        // menggunaakan cara ini  berhasil
+        Post::withTrashed()->where('category_id', $id)->update(['category_id' => config('cms.default_category_id')]);
         
         // update semua id category ke uncotegorized untuk semua tulisan yang kctegorynya dihapus belum berfungsi
-        $category_id = $this->defaultcategory_id;
-        Post::withTrashed()->where('category_id', $id)->update(['category_id' => $category_id]);
+        // $category_id = $this->defaultcategory_id;
+        // Post::withTrashed()->where('category_id', $id)->update(['category_id' => $category_id]);
         
         $categories = Category::findOrfail($id);
         $categories->delete();

@@ -14,7 +14,7 @@ class HomeController extends BackendController
      */
     public function index()
     {
-        $a = 34;
+        $a = config('cms.default_category_id');
 
         //Alert::success('Welcome', 'Login Success');
         // return view('backend.stisla.dashboard');

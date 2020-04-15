@@ -46,9 +46,10 @@
         Start creating your amazing application! <br><br>
         
         Coba if <br><br>
+        {{ $a }} <br>
 
-        @if ($a == 3)
-            Oke
+        @if ($a == 1)
+            ini adalah idi default 
         @else
             Lanjut
         @endif

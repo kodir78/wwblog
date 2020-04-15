@@ -53,6 +53,6 @@
     <!-- AdminLTE for demo purposes -->
     <script src="/assets/backend/adminlte/dist/js/demo.js"></script>
     <!-- page script -->
-    
+    @yield('script-js')
 </body>
 </html>

@@ -106,18 +106,17 @@
             <a href="../widgets.html" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Logout
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
                 Dashboard
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <form action="{{route("logout")}}" method="POST">
+              @csrf
+              <button class="dropdown-item nav-link btn btn-default" style="cursor:pointer"><i class="fas fa-sign-out-alt text-danger"></i> <strong>Logout</strong></button>
+          </form>
+          </li>
+          
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

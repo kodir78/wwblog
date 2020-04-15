@@ -43,13 +43,13 @@
                 //extraPlugins: 'easyimage',
                 height: 400
             });
-        })
+        
         //Save Draft        
         $('#draft-btn').click(function(e) {
             e.preventDefault();
             $('#published_at').val("");
             $('#post-form').submit();
         });
-        
+    })
         
     </script>

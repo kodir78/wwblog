@@ -21,7 +21,6 @@
                     @csrf
                     @method('delete')
                     @if($user->id == config('cms.default_user_id'))
-                    {{-- @if($user->id == 1) --}}
                     <button onclick="return false" type="submit" class="btn btn-xs btn-danger disabled">
                         <i class="fa fa-times"></i>
                     </button>
@@ -34,7 +33,7 @@
             </td>
             <td>{{ $user->name }}</td>
             <td>{{ $user->email }}</td>
-            <td>{{ $default_id }}</td>
+            <td>{{ $user->user_roles }}</td>
             <td>{{ $user->posts->count() }}</td>
         </tr>
         @endforeach

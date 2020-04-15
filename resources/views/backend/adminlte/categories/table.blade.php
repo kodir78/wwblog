@@ -18,8 +18,7 @@
                 <form  class="d-inline" action="{{route('categories.destroy', $category->id)}}" method="POST">
                     @csrf
                     @method('delete')
-                    {{-- @if($category->id == config('cms.default_category_id')) --}}
-                    @if($category->id == $category_id)
+                    @if($category->id == config('cms.default_category_id'))
                     <button onclick="return false" type="submit" class="btn btn-xs btn-danger disabled">
                         <i class="fa fa-times"></i>
                     </button>

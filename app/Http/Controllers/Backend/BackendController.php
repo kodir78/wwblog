@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class BackendController extends Controller
 {
     protected $limit = 5;
-    protected $defaultcategory_id = 1;
+    // protected $defaultcategory_id = 1;
+    // protected $default_user_id  = 1;
     /**
      * Create a new controller instance.
      *

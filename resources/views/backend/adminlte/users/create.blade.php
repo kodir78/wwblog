@@ -2,6 +2,9 @@
 @section("title") Create User @endsection
 @section('styles')
 <!-- Start styles Libraies -->
+<!-- Select2 -->
+<link rel="stylesheet" href="/assets/backend/adminlte/plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="/assets/backend/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 <!-- Jasny Bootstrap 4 -->
 <link rel="stylesheet" href="/assets/backend/adminlte/plugins/jasny-bootstrap/4.0.0/css/jasny-bootstrap.min.css">
 @endsection
@@ -33,7 +36,7 @@
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
-      <form id="post-form" enctype="multipart/form-data" class="bg-white shadow-sm p-3" action="{{route('categories.store')}}" method="POST">
+      <form id="post-form" enctype="multipart/form-data" class="bg-white shadow-sm p-3" action="{{route('users.store')}}" method="POST">
         @csrf
         <div class="row">
           <div class="col-md-8">
@@ -52,6 +55,15 @@
                   </span>
                   @enderror
                 </div>
+                <div class="form-group">
+                  <label for="slug">Slug</label>
+                  <input id="slug" name="slug" type="text" class="form-control @error('slug') is-invalid @enderror" placeholder="Slug" readonly>
+                  @error('slug')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                </div>
                 <!-- /.form-group -->
                 <!-- text input -->
                 <div class="form-group">
@@ -64,10 +76,22 @@
                   @enderror
                 </div>
                 <!-- /.form-group -->
+                {{-- <div class="form-group">
+                  <label for="user_roles">Roles</label>
+                  <select class="form-control  {{$errors->first('user_roles') ? "is-invalid" :"" }} " name="user_roles" id="user_roles">
+                      <option value="">Select Role</option>
+                      <option value="1">Administrator</option>
+                      <option value="0">Author</option>
+                  </select>
+                  <div class="invalid-feedback">
+                      {{$errors->first('roles')}}
+                  </div>
+              </div> --}}
+                <!-- /.form-group -->
                 <!-- text input -->
                 <div class="form-group">
                   <label for="password">Password</label>
-                  <input id="password" name="password" type="text" class="form-control @error('password') is-invalid @enderror">
+                  <input id="password" name="password" type="password" class="form-control @error('password') is-invalid @enderror">
                   @error('password')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -77,9 +101,9 @@
                 <!-- /.form-group -->
                 <!-- text input -->
                 <div class="form-group">
-                  <label for="confirmpassword">Confirm Password</label>
-                  <input id="confirmpassword" name="confirmpassword" type="text" class="form-control @error('confirmpassword') is-invalid @enderror">
-                  @error('confirmpassword')
+                  <label for="password_confirmation">Confirm Password</label>
+                  <input id="password_confirmation" name="password_confirmation" type="password" class="form-control @error('password_confirmation') is-invalid @enderror">
+                  @error('password_confirmation')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                   </span>
@@ -135,7 +159,10 @@
 <!-- End Content -->
 
 @section('footer-scripts')
-<!-- Page Specific JS File -->
+<!-- Select2 -->
+<script src="/assets/backend/adminlte/plugins/select2/js/select2.full.min.js"></script>
 <!-- Jasny Bootstrap 4 -->
 <script src="/assets/backend/adminlte/plugins/jasny-bootstrap/4.0.0/js/jasny-bootstrap.min.js"></script>
+<!-- Page Specific JS File -->
+@include('backend.adminlte.users.script')
 @endsection

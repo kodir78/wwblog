@@ -27,7 +27,9 @@ class UserStoreRequest extends FormRequest
     {
         return [
             "name" => "required|min:3|max:100",
+            'slug'     => 'required|unique:users',
             "email" => "required|email",
+            // 'user_roles' => 'required',
             "password" => "required",
             "password_confirmation" => "required|same:password"
         ];
