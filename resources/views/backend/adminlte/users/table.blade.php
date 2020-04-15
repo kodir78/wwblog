@@ -9,7 +9,7 @@
         </tr>
     </thead>
     <tbody>
-        
+        <?php $currentUser = auth()->user(); ?>
         @foreach ($users as $user)
         
         <tr>
@@ -17,19 +17,16 @@
                 <a title="Edit" class="btn btn-xs btn-default edit-row" href="{{route('users.edit', $user->id)}}">
                     <i class="fas fa-edit"></i>
                 </a>&nbsp;&nbsp;
-                <form  class="d-inline" action="{{route('users.destroy', $user->id)}}" method="POST">
-                    @csrf
-                    @method('delete')
-                    @if($user->id == config('cms.default_user_id'))
+               
+                    @if($user->id == config('cms.default_user_id') || $user->id == $currentUser->id)
                     <button onclick="return false" type="submit" class="btn btn-xs btn-danger disabled">
                         <i class="fa fa-times"></i>
                     </button>
                     @else
-                    <button onclick="return confirm('Are you sure?');" type="submit" class="btn btn-xs btn-danger">
+                    <a href="{{ route('users.confirm', $user->id) }}" type="submit" class="btn btn-xs btn-danger">
                         <i class="fa fa-times"></i>
-                    </button>
+                    </a>
                     @endif 
-                </form>
             </td>
             <td>{{ $user->name }}</td>
             <td>{{ $user->email }}</td>

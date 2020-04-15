@@ -22,7 +22,7 @@ class UserDestroyRequest extends FormRequest
     //ini belum bisa digunakan ? tampilan errror masih mengarah ke forbidden
     public function forbiddenResponse()
     {
-        return redirect()->back()->with('error-message', 'You cannot delete default User');
+        return redirect()->back()->with('message', 'You cannot delete default User');
     }
 
     /**

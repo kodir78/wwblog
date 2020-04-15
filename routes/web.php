@@ -60,6 +60,10 @@ Route::group(['middleware' => 'auth'], function()
     Route::resource('/backend/posts', 'Backend\PostController');
 
     Route::resource('/backend/categories', 'Backend\CategoryController');
+    Route::get('/backend/users/{user}/confirm/', [
+        'uses' => 'Backend\UserController@confirm',
+        'as' => 'users.confirm'
+    ]);
     Route::resource('/backend/users', 'Backend\UserController');
     Route::get('/backend/posts/trash', 'Backend\PostController@trash')->name('posts.trash');
     //Route::resource('/backend/tags', 'Backend\TagsController');

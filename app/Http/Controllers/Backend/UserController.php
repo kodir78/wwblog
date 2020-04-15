@@ -20,10 +20,9 @@ class UserController extends BackendController
     public function index()
     {
         $Pagetitle = "All User";
-        $default_id = $this->default_user_id;
         $users = User::orderBy('name')->paginate($this->limit);
         $usersCount = User::count();
-        return view('backend.adminlte.users.index', compact('users', 'usersCount', 'Pagetitle', 'default_id', 'width'));
+        return view('backend.adminlte.users.index', compact('users', 'usersCount', 'Pagetitle'));
     }
     
     /**
@@ -89,15 +88,12 @@ class UserController extends BackendController
     {
         $user = User::findOrFail($id);
         
-        $user_roles = 1;
-        // $user_roles = $request->user_roles;
         
         if ($request->input('password')) {
             # Jika password diisi
             $user_data = [
                 'name' => $request->name,
                 'slug' => Str::slug($request->name),
-                'user_roles' => $request->user_roles,
                 'status' => $request->status,
                 'password' => bcrypt($request->password),
                 // 'avatar' => 'public/uploads/images/users/'.$new_image,
@@ -107,7 +103,6 @@ class UserController extends BackendController
             $user_data = [
                 'name' => $request->name,
                 'slug' => Str::slug($request->name),
-                'user_roles' => $user_roles,
                 'status' => $request->status,
             ];
         }
@@ -129,5 +124,18 @@ class UserController extends BackendController
         //$users->delete();
         // Alert::success('Post succesfully Trash', 'Delete Success');
         return redirect()->back()->with('message', 'Your User Was Deleted');
+    }
+    /**
+    * Remove the specified resource from storage.
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function confirm(Requests\UserDestroyRequest $request, $id)
+    {
+        $user = User::findOrfail($id);
+        $users = User::where('id', '!=', $user->id)->pluck('name', 'id');
+        
+        return view("backend.adminlte.users.confirm", compact('user', 'users'));
     }
 }

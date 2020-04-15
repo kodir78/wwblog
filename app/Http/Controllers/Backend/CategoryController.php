@@ -97,10 +97,6 @@ class CategoryController extends BackendController
         // menggunaakan cara ini  berhasil
         Post::withTrashed()->where('category_id', $id)->update(['category_id' => config('cms.default_category_id')]);
         
-        // update semua id category ke uncotegorized untuk semua tulisan yang kctegorynya dihapus belum berfungsi
-        // $category_id = $this->defaultcategory_id;
-        // Post::withTrashed()->where('category_id', $id)->update(['category_id' => $category_id]);
-        
         $categories = Category::findOrfail($id);
         $categories->delete();
         // Alert::success('Post succesfully Trash', 'Delete Success');
