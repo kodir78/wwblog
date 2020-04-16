@@ -120,10 +120,23 @@ class UserController extends BackendController
     */
     public function destroy(Requests\UserDestroyRequest $request, $id)
     {
-        $users = User::findOrfail($id)->delete();
-        //$users->delete();
-        // Alert::success('Post succesfully Trash', 'Delete Success');
-        return redirect()->back()->with('message', 'Your User Was Deleted');
+        $user = User::findOrFail($id);
+
+        $deleteOption = $request->delete_option;
+        $selectedUser = $request->selected_user;
+
+        if ($deleteOption == "delete") {
+            // delete user posts
+            $user->posts()->withTrashed()->forceDelete();
+        }
+        elseif ($deleteOption == "attribute") {
+            $user->posts()->withTrashed()->update(['author_id' => $selectedUser]);
+        }
+
+        $user->delete();
+
+        return redirect("/backend/users")->with("message", "User was deleted successfully!");
+        // return redirect()->back()->with('message', 'Your User Was Deleted');
     }
     /**
     * Remove the specified resource from storage.
