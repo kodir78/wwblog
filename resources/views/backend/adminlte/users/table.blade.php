@@ -30,7 +30,7 @@
             </td>
             <td>{{ $user->name }}</td>
             <td>{{ $user->email }}</td>
-            <td>{{ $user->user_roles }}</td>
+            <td></td>
             <td>{{ $user->posts->count() }}</td>
         </tr>
         @endforeach

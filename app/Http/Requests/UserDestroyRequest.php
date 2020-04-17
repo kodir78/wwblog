@@ -15,14 +15,15 @@ class UserDestroyRequest extends FormRequest
     {
         // belum dapat difungsikan
         // function jika id yang akan dihapus adalah id defult maka tampikan forbiden
-        return !($this->route('user') == config('cms.default_user_id'));
+        return !($this->route('user') == config('cms.default_user_id') ||
+                $this->route('user') == auth()->user()->id);
         
     }
 
     //ini belum bisa digunakan ? tampilan errror masih mengarah ke forbidden
     public function forbiddenResponse()
     {
-        return redirect()->back()->with('message', 'You cannot delete default User');
+        return redirect()->back()->with('message', 'You cannot delete default user or delete yourself!');
     }
 
     /**

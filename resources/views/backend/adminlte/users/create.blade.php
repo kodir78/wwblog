@@ -76,18 +76,6 @@
                   @enderror
                 </div>
                 <!-- /.form-group -->
-                {{-- <div class="form-group">
-                  <label for="user_roles">Roles</label>
-                  <select class="form-control  {{$errors->first('user_roles') ? "is-invalid" :"" }} " name="user_roles" id="user_roles">
-                      <option value="">Select Role</option>
-                      <option value="1">Administrator</option>
-                      <option value="0">Author</option>
-                  </select>
-                  <div class="invalid-feedback">
-                      {{$errors->first('roles')}}
-                  </div>
-              </div> --}}
-                <!-- /.form-group -->
                 <!-- text input -->
                 <div class="form-group">
                   <label for="password">Password</label>

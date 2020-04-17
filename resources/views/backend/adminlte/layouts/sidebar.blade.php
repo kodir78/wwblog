@@ -56,6 +56,7 @@
               </li>
             </ul>
           </li>
+          @role(['admin','editor'])
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
@@ -79,6 +80,8 @@
               </li>
             </ul>
           </li>
+          @endrole
+          @role('admin')
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
@@ -102,14 +105,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="../widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Dashboard
-              </p>
-            </a>
-          </li>
+          @endrole
           <li class="nav-item">
             <form action="{{route("logout")}}" method="POST">
               @csrf

@@ -84,27 +84,6 @@
                   </span>
                   @enderror
                 </div>
-                {{-- <div class="form-group">
-                  <label>Minimal</label>
-                  <select class="form-control select2" name="user_roles" id="user_roles" style="width: 50%;">
-                    <option selected="">Select Role</option>
-                    <option value="1" @if ($user->user_roles == 1)
-                      selected="selected"
-                      @endif>
-                      Administrator
-                  </option>
-                    <option  value="0" selected="selected" @if ($user->user_roles == 0)
-                      
-                      @endif>Author</option>
-                  </select>
-                  @error('user_roles')
-                <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-                </div> --}}
-                <!-- /.form-group -->
-                
               <!-- text input -->
               <div class="form-group">
                 <label for="password">Password</label>
