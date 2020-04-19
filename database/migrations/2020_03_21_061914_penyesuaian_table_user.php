@@ -18,7 +18,7 @@ class PenyesuaianTableUser extends Migration
             $table->string('slug')->unique();
             $table->string("user_login")->nullable();
             $table->text("url")->nullable();
-            $table->string("phone");
+            $table->string("phone")->nullable();
             $table->enum("status", ["ACTIVE", "INACTIVE"]);
             $table->text("bio")->nullable();
             $table->string("avatar")->nullable();

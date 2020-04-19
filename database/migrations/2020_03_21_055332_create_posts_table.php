@@ -23,7 +23,7 @@ class CreatePostsTable extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('restrict');
             $table->text('excerpt');
             $table->text('body');
-            $table->string('image')->nullable;
+            $table->string('image')->nullable();
             $table->timestamp('published_at')->nullable();
             $table->bigInteger('view_count')->nullable();
             $table->bigInteger("updated_by")->nullable();

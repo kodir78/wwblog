@@ -8,15 +8,25 @@ use App\Tag;
 
 class NavigationComposer
 {
-    public function compose(view $view)
+    public function compose(View $view)
     {
         $this->composeCategories($view);
+        
+        $this->composeTags($view);
 
         $this->composePopularPost($view);
+        
+        // $this->composeSlider($view);
 
     }
 
-    public function composeCategories(view $view)
+    public function composePopularPost(View $view)
+    {
+        $popularPosts =  Post::published()->popular()->take(3)->get();
+        $view->with('popularPosts', $popularPosts);
+    }
+    
+    public function composeCategories(View $view)
     {
         $categories =  Category::with(['posts'=> function($query){
                     $query->published();
@@ -24,11 +34,22 @@ class NavigationComposer
         $view->with('categories', $categories);
     }
 
-    public function composePopularPost(view $view)
+    public function composeTags(View $view)
     {
-        $popularPosts =  Post::published()->popular()->take(3)->get();
-        $view->with('popularPosts', $popularPosts);
-    }
+        // ambil semua tags yang memiliki relasi dengan post
+        $tags = Tag::has('posts')->get();
 
+        //lewatkan semua tags ke dalam view
+        $view->with('tags', $tags);
+    }
+    //composer view untuk slider
+    public function composeSlider(View $view)
+    {
+        // ambil semua slider
+        $slider = Slider::all();
+
+        //lewatkan semua slider ke dalam view
+        $view->with('slider', $slider);
+    }
 
 }

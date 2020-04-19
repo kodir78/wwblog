@@ -57,7 +57,15 @@ class Post extends Model
         //Pastikan kolom published_at tidak Null
         return is_null($this->published_at) ? '' : $this->published_at->diffforHumans();
     }
-    
+    // atribut Link Tags
+    public function getTagsHtmlAttribute()
+    {
+        $anchors = [];
+        foreach($this->tags as $tag) {
+            $anchors[] = '<a href="' . route('tag', $tag->slug) . '">' . $tag->title . '</a>';
+        }
+        return implode(", ", $anchors);
+    }
     
     // fungsi scope untuk mengurutkan tulisan terabaru
     public function scopeLatestFirst($query)

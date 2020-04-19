@@ -33,17 +33,32 @@
                             </div>
                             <div class="blog-content">
                                 <br>
-                                <div class="time-area time-area-2">
-                                    <span class="ti-timer"> </span>
-                                    <span class="published-time"> {{ $post->date }}</span>
+                                <div class="post-meta">
+                                    <span>
+                                        <i class="fa fa-calendar-alt"></i>
+                                        <a href="#"> {{ $post->date }}</a>
+                                    </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span>
+                                        <i class="fa fa-user"></i>
+                                        <a href="{{ route('author', $post->author->slug) }}"> {{ $post->author->name  }}</a>
+                                    </span>
                                 </div>
-                                <div class="time-area time-area-2">
-                                    <span class="ti-user"> </span>
-                                    <span class="seat"><a href="{{ route('author', $post->author->slug) }}"> {{ $post->author->name  }}</a></span>
-                                </div>
-                                <br>
                                 <h5><a href="{{ route('blog.show', $post->slug) }}">{{ $post->title}}</a></h5>
                                 {!!  substr(strip_tags($post->excerpt), 0, 150) !!}
+                                <div class="post-meta">
+                                    <span>
+                                        <i class="fa fa-tag"></i>
+                                        {!! $post->tags_html !!}
+                                    </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span>
+                                        <i class="fa fa-folder"></i>
+                                        <a href="{{ route('category', $post->category->slug) }}"> {{ $post->category->title }}</a>
+                                    </span>
+                                    <span>
+                                        <i class="fa fa-comments"></i>
+                                        <a href="#">19 Comments</a>
+                                    </span>
+                                </div>
                                 <div class="events-view-btn mt-10">
                                     <a href="{{ route('blog.show', $post->slug) }}">Detail</a>
                                 </div>
@@ -62,9 +77,9 @@
                     </div>
                 </div>
             </div>
-            {{-- Sidebar detail post --}}
+            {{-- Sidebar post --}}
             @include('frontend.sikka.sidebarpostdetail')
-            {{-- Sidebar detail post end --}}
+            {{-- Sidebar post end --}}
         </div>
     </div>
 </div>

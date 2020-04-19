@@ -7,7 +7,7 @@
             <li>
                 <div class="comments-box main-comments d-flex">
                     <div class="comments-avatar">
-                        <img src="{{ asset('public/assets/frontend/sikka/img/comments/comments_01.png')}}" alt="">
+                        <img src="/assets/frontend/sikka/img/comments/comments_01.png" alt="">
                     </div>
                     <div class="comments-text">
                         <div class="avatar-name">
@@ -21,7 +21,7 @@
                     <li>
                         <div class="comments-box d-flex">
                             <div class="comments-avatar">
-                                <img src="{{ asset('public/assets/frontend/sikka/img/comments/comments_02.png')}}" alt="">
+                                <img src="/assets/frontend/sikka/img/comments/comments_02.png" alt="">
                             </div>
                             <div class="comments-text">
                                 <div class="avatar-name">
@@ -37,7 +37,7 @@
             <li>
                 <div class="comments-box main-comments d-flex">
                     <div class="comments-avatar">
-                        <img src="{{ asset('public/assets/frontend/sikka/img/comments/comments_03.png')}}" alt="">
+                        <img src="/assets/frontend/sikka/img/comments/comments_03.png" alt="">
                     </div>
                     <div class="comments-text">
                         <div class="avatar-name">

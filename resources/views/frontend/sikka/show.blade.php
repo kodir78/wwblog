@@ -25,49 +25,50 @@
     </div>
 </div>
 <!-- slider-end -->
-<!-- detail_blog start -->
 <div class="course-details-area gray-bg pt-100 pb-70">
     <div class="container">
         <div class="row">
             <div class="col-xl-8 col-lg-8">
                 <div class="blog-wrapper blog-list blog-details blue-blog mb-50">
-                    {{-- @foreach ($posts as $post)  --}}
-                    @if ($post->imageUrl)
                     <div class="blog-thumb mb-35">
+                        @if ($post->imageUrl)
                         <img src="{{ $post->imageUrl }}" alt="{{ $post->title }}">
-                        {{-- <span class="blog-text-offer">{{ $post->category->title}}</span> --}}
+                        <span class="blog-text-offer"> {{ $post->category->title }}</span>
+                        @else 
+                        <img src="/assets/frontend/sikka/img/blog/news_details_thumb_01.jpg" alt="">
+                        <span class="blog-text-offer"> {{ $post->category->title }}</span>
+                        @endif
                     </div>
-                    @endif
                     <div class="blog-content news-content">
-                        <div class="time-area time-area-2">
-                            <span class="ti-timer"> </span>
-                            <span class="published-time"><strong> {{ $post->date }}</strong></span>
+                        <div class="blog-meta news-meta">
+                            <span>
+                                <i class="fa fa-calendar-alt"></i>
+                                <a href="#"> {{ $post->date }}</a>
+                            </span>
                         </div>
-                        <div class="time-area time-area-2">
-                            <span class="ti-user"> </span>
-                            <span class="seat"><strong> {{ $post->author->name  }}</strong></span>
-                        </div>
-                        <br><br>
                         <h5>{{ $post->title}}</h5>
                         {!! $post->body !!}
                         <div class="blog-wrapper-footer">
                             <div class="news-wrapper-tags">
                                 <div class="row">
-                                    <div class="col-xl-6 col-lg-6 col-md-6">
-                                        <div class="widget-tags clearfix">
-                                            <span>Tags:</span>
-                                            <ul class="sidebar-tad clearfix">
-                                                @foreach ($post->tags as $tag)
-                                                <li>
-                                                    <a href="#">{{$tag->title}} </a>
-                                                </li>
-                                                @endforeach
-                                            </ul>
+                                    <div class="col-xl-9 col-lg-9 col-md-9">
+                                        <div class="new-post-tag">
+                                            {{-- <span>Tags:</span> --}}
+                                            <i class="fa fa-tag"></i>
+                                            {!! $post->tags_html !!}
+                                            <span>&nbsp;&nbsp;
+                                                <i class="fa fa-folder"></i>&nbsp;
+                                                <a href="{{ route('category', $post->category->slug) }}"> {{ $post->category->title }}</a>
+                                            </span>&nbsp;&nbsp;
+                                            <span>
+                                                <i class="fa fa-comments"></i>
+                                                <a href="#">19 Comments</a>
+                                            </span>
                                         </div>
                                     </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-6">
+                                    <div class="col-xl-3 col-lg-3 col-md-3">
                                         <div class="new-post-tag news-share-icon text-left text-md-right">
-                                            <span>Share</span>
+                                            {{-- <span>Share</span> --}}
                                             <a href="#">
                                                 <i class="fab fa-facebook-f"></i>
                                             </a>
@@ -82,30 +83,34 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xl-12">
-                                    <div class="author-comments-box d-flex">
-                                        <div class="author-comments-avatar">
-                                            @if($post->author->avatar)
-                                            <img src="{{ $post->author->avatar}}" alt="">
-                                            @else
-                                            <img src="{{ asset('public/assets/frontend/sikka/img/comments/author_comments_01.png')}}" alt="">
-                                            @endif
-                                        </div>
-                                        <div class="author-comments-text">
-                                            <div class="author-comments-title">
-                                                <h5>{{ $post->author->display_name }}</h5>
-                                                {{-- <span>Author</span> --}}
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="author-comments-box d-flex">
+                                            <div class="author-comments-avatar">
+                                                @if($post->author->avatar)
+                                                <img src="{{ $post->author->avatar}}" alt="">
+                                                @else
+                                                <img src="/assets/frontend/sikka/img/comments/author_comments_01.png" alt="">
+                                                @endif
                                             </div>
-                                            <p>{!! $post->author->user_bio !!}</p>
+                                            <div class="author-comments-text">
+                                                <div class="author-comments-title">
+                                                    <h5><a href="{{ route('author', $post->author->slug) }}"> {{ $post->author->name  }}</a></h5>
+                                                    {{-- <h5>{{ $post->author->display_name }}</h5> --}}
+                                                    {{-- <span>Author</span> --}}
+                                                </div>
+                                                <p>{!! $post->author->bio !!}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {{-- @endforeach --}}
                 </div>
+                {{-- Comments detail post --}}
                 @include('frontend.sikka.comments')
+                {{-- Comments detail post --}}
             </div>
             {{-- Sidebar detail post --}}
             @include('frontend.sikka.sidebarpostdetail')
@@ -113,7 +118,7 @@
         </div>
     </div>
 </div>
-<!-- detail_blog end -->
+<!-- end news-details-->
 <!-- subscribe start -->
 <!-- subscribe end -->
 @endsection

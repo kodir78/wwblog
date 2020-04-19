@@ -10,7 +10,7 @@ class Tag extends Model
     use softDeletes;
     protected $table = 'tags';
     protected $fillable = [
-        'title', 'slug', 'hits', 'created_by','updated_by', 'deleted_by', 'deleted_at',
+        'title', 'slug',
     ];
 
     public function users(){
@@ -19,5 +19,11 @@ class Tag extends Model
 
     public function posts(){
     	return $this->belongsToMany(Post::class);
+    }
+
+    // SEO 
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }
