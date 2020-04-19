@@ -180,6 +180,22 @@ class Post extends Model
         return $this->belongsToMany(Tag::class);
     }
     
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function commentsNumber($label = 'Comment')
+    {
+        $commentsNumber = ($tmp = $this->comments) ? $tmp->count() : 0;
+
+        return $commentsNumber . " " . str_plural($label, $commentsNumber);
+    }
+
+    public function createComment(array $data)
+    {
+        $this->comments()->create($data);
+    }
     
     // SEO 
     public function getRouteKeyName()
