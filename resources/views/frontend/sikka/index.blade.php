@@ -3,23 +3,24 @@
 {{-- @section("sub_title")Category @endsection --}}
 @section('content')
 <!-- slider-start -->
-<div class="slider-area pos-relative">
+{{-- <div class="slider-area pos-relative">
     <div class="slider-active">
         @foreach ($sliders as $slider)
-        @if ($slider->imageurl)
+        @if ($slider->imageurl) --}}
         {{-- menggunakan imageUrl --}}
-        <div class="single-slider slider-height d-flex align-items-center justify-content-center" style="background-image: url({{ $slider->imageurl }});"> 
+        {{-- <div class="single-slider slider-height d-flex align-items-center justify-content-center" style="background-image: url({{ $slider->imageurl }});"> 
             @endif
         </div>
         @endforeach
     </div>
-</div>
+</div> --}}
 <!-- slider-end -->
 <!-- latest_blog start -->
 <div class="course-details-area gray-bg pt-100 pb-70">
     <div class="container">
         <div class="row">
             <div class="col-xl-8 col-lg-8">
+                @include('frontend.sikka.alert')
                 <div class="row">
                     @foreach ($posts as $post)
                     <div class="col-xl-6 col-lg-6 col-md-6">

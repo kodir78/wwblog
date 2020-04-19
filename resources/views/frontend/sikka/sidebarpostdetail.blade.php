@@ -1,15 +1,15 @@
 <div class="col-xl-4 col-lg-4">
     <div class="courses-details-sidebar-area">
-        {{-- <div class="widget mb-40 white-bg">
+        <div class="widget mb-40 white-bg">
             <div class="sidebar-form">
-                <form action="{{ route('blog.search') }}">
-                    <input placeholder="Cari..." type="text" name="keyword">
+                <form action="{{ route('blog') }}">
+                    <input placeholder="search ..." type="text" value="{{ request('term') }}" name="term">
                     <button type="submit" value="filter" >
                         <i class="ti-search"></i>
                     </button>
                 </form>
             </div>
-        </div> --}}
+        </div>
         <div class="widget mb-40 widget-padding white-bg">
             <h4 class="widget-title">Categories</h4>
             <div class="widget-link">

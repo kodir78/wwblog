@@ -7,8 +7,8 @@
                     <div class="col-xl-6 col-lg-6 col-md-6 col-12">
                         <div class="header-contact-info d-flex">
                             <div class="header-contact header-contact-phone">
-                                {{-- <span class="ti-headphone"></span> --}}
-                                {{-- <p class="phone-number">+0123456789</p> --}}
+                                <span class="ti-headphone"></span>
+                                <p class="phone-number">+0123456789</p>
                             </div>
                             <div class="header-contact header-contact-email">
                                 <span class="ti-email"></span>
@@ -20,10 +20,10 @@
                         <div class="header-social-icon-list">
                             <ul>
                                 <li><a href="#"><span class="ti-facebook"></span></a></li>
-                                {{-- <li><a href="#"><span class="ti-twitter-alt"></span></a></li> --}}
-                                {{-- <li><a href="#"><span class="ti-dribbble"></span></a></li> --}}
+                                <li><a href="#"><span class="ti-twitter-alt"></span></a></li>
+                                <li><a href="#"><span class="ti-dribbble"></span></a></li>
                                 <li><a href="#"><span class="ti-google"></span></a></li>
-                                {{-- <li><a href="#"><span class="ti-pinterest"></span></a></li> --}}
+                                <li><a href="#"><span class="ti-pinterest"></span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -45,16 +45,16 @@
                     <div class="col-xl-10 col-lg-10 col-md-6 col-6">
                         <div class="header-bottom-icon f-right">
                             <ul>
-                                <li class="toggle-search-icon"><a href="#"><span class="ti-search"></span>
+                                {{-- <li class="toggle-search-icon"><a href="#"><span class="ti-search"></span>
                                         <div class="toggle-search-box">
-                                            <form action="{{ route('blog.search') }}" id="searchbox">
-                                                <input placeholder="Search" type="text" name="keyword">
+                                            <form action="{{ route('blog') }}" id="searchbox">
+                                                <input placeholder="Search" type="text" value="{{ request('term') }}" name="term">
                                                 <button class="button-search" type="submit" value="filter"><span class="ti-search"></span></button>
                                             </form>
                                         </div>
                                     </a>
 
-                                </li>
+                                </li> --}}
                                 {{-- <li class="shopping-cart"><a href="#"><span class="ti-shopping-cart"></span>
                                         <span class="shopping-counter">0</span>
                                     </a></li> --}}

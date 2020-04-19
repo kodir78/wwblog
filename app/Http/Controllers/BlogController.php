@@ -16,15 +16,21 @@ class BlogController extends Controller
     protected $limit = 6;
     public function index(Post $posts)
     {
-        $sliders = Slider::all();
+        
+        // $sliders = Slider::all();
         $tags = Tag::all();
         // \DB::enableQueryLog();
         $posts = Post::with('author')
                 ->latestFirst()
                 ->published()
+                ->filter(request('term'))
                 ->take(6)
                 ->paginate($this->limit);
                 //->get();
+
+        
+
+        // $posts = $posts->paginate($this->limit);
        return view('frontend.sikka.index', compact('posts', 'sliders', 'tags'));
         // dd(\DB::getQueryLog());
     }
@@ -82,7 +88,7 @@ class BlogController extends Controller
         $title = "Hasil Pencarian";
         $tags = Tag::all();
         $categories = Category::all();
-        $filterKeyword = $request->get('keyword');
+        // $filterKeyword = $request->get('term');
         $posts = \App\Post::with('category', 'author')
                 ->paginate($this->limit);
         if($filterKeyword){

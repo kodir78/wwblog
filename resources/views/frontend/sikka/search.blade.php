@@ -3,7 +3,7 @@
 {{-- @section("sub_title")Category @endsection --}}
 @section('content')
 <!-- slider-start -->
-<div class="slider-area">
+{{-- <div class="slider-area">
     <div class="page-title">
         <div class="single-slider slider-height slider-height-breadcrumb d-flex align-items-center" style="background-image: url(/assets/frontend/sikka/img/bg/others_bg.jpg);">
             <div class="container">
@@ -17,11 +17,12 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <!-- slider-end -->
 <!-- courses start -->
 <div class="blog-grid-area gray-bg pt-100 pb-70">
     <div class="container">
+        @include('frontend.sikka.alert')
         <div class="blog-grid-list">
             <div class="row">
                 @foreach ($posts as $post)

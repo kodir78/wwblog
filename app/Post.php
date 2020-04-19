@@ -86,6 +86,25 @@ class Post extends Model
     {
         return $query->where("published_at");
     }
+    // fungsi scope untuk manampilkan yang pencarian
+    public function scopeFilter($query, $term)
+    {
+        // check if any term entered
+        if ($term) 
+        {
+            $query->where(function($q) use ($term){
+                //tambah pencarian dengan relasi ke author and category
+                $q->whereHas('author', function($qr) use ($term) {
+                    $qr->where('name', 'LIKE', "%{$term}%");
+                });
+                $q->orWhereHas('category', function($qr) use ($term) {
+                    $qr->where('title', 'LIKE', "%{$term}%");
+                });
+                $q->orWhere('title', 'LIKE', "%{$term}%");
+                $q->orWhere('body', 'LIKE', "%{$term}%");
+            });
+        }
+    }
         
     // fungsi input publishe_at jika dikosongkan berisi NULL
     public function setPublishedAtAttribute($value)
