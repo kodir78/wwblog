@@ -18,6 +18,7 @@ class CreateSlidersTable extends Migration
             $table->string('title');
             $table->string("slug")->unique();
             $table->string('url');
+            $table->string("image")->nullable();
             $table->bigInteger("created_by");
             $table->bigInteger("updated_by")->nullable();
             $table->bigInteger("deleted_by")->nullable();

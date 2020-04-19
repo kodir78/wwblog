@@ -15,12 +15,12 @@ class PenyesuaianTableUser extends Migration
     {
         //
         Schema::table('users', function (Blueprint $table) {
+            $table->string('slug')->unique();
             $table->string("user_login")->nullable();
-            $table->boolean("user_roles")->default(0);
-            $table->text("user_url")->nullable();
-            $table->string("user_phone");
+            $table->text("url")->nullable();
+            $table->string("phone");
             $table->enum("status", ["ACTIVE", "INACTIVE"]);
-            $table->text("user_bio")->nullable();
+            $table->text("bio")->nullable();
             $table->string("avatar")->nullable();
             $table->string("display_name")->nullable();
         });
