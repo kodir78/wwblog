@@ -16,17 +16,17 @@ class NavigationComposer
 
         $this->composePopularPost($view);
         
-        // $this->composeSlider($view);
+         $this->composeArchives($view);
 
     }
 
-    public function composePopularPost(View $view)
+    private function composePopularPost(View $view)
     {
         $popularPosts =  Post::published()->popular()->take(3)->get();
         $view->with('popularPosts', $popularPosts);
     }
     
-    public function composeCategories(View $view)
+    private function composeCategories(View $view)
     {
         $categories =  Category::with(['posts'=> function($query){
                     $query->published();
@@ -34,7 +34,7 @@ class NavigationComposer
         $view->with('categories', $categories);
     }
 
-    public function composeTags(View $view)
+    private function composeTags(View $view)
     {
         // ambil semua tags yang memiliki relasi dengan post
         $tags = Tag::has('posts')->get();
@@ -43,13 +43,12 @@ class NavigationComposer
         $view->with('tags', $tags);
     }
     //composer view untuk slider
-    public function composeSlider(View $view)
+    private function composeArchives(View $view)
     {
-        // ambil semua slider
-        $slider = Slider::all();
+        // function static ada di model Post function archive
+        $archives = Post::archives();
 
-        //lewatkan semua slider ke dalam view
-        $view->with('slider', $slider);
+        $view->with('archives', $archives);
     }
 
 }

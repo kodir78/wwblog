@@ -11,9 +11,7 @@ class Post extends Model
     // agar published_at diterjemahkan sebagai object Carbon maka buat
     protected $dateFormat = 'Y-m-d H:i:s';
     protected $dates = ['published_at'];
-    // protected $casts = [
-    //     'published_at' => 'datetime:Y-m-d H:i:s',
-    // ];
+    
     use softDeletes;
     // Jika semua field dimasukan
     //protected $guardian = [];
@@ -84,21 +82,66 @@ class Post extends Model
     {
         return $query->where("published_at", "<=", Carbon::Now());
     }
+
     // fungsi scope untuk manampilkan yang status draft jika field published_at > tgl sekarang
     public function scopeScheduled($query)
     {
         return $query->where("published_at", ">", Carbon::Now());
     }
+
     // fungsi scope untuk manampilkan yang status draft jika field published_at kosong
     public function scopeDraft($query)
     {
         return $query->where("published_at");
     }
-    // fungsi scope untuk manampilkan yang pencarian
-    public function scopeFilter($query, $term)
+    
+    public static function archives()
     {
+        if (env('DB_CONNECTION') == 'pgsql')
+        {
+            return static::selectRaw('count(id) as post_count, extract(year from published_at) as year, extract(month from published_at) as month')
+                        ->published()
+                        ->groupBy('year', 'month')
+                        ->orderByRaw('min(published_at) desc')
+                        ->get();
+        }
+        else
+        {
+            return static::selectRaw('count(id) as post_count, year(published_at) year, month(published_at) month')
+                        ->published()
+                        ->groupBy('year', 'month')
+                        ->orderByRaw('min(published_at) desc')
+                        ->get();
+        }
+    }
+
+    // fungsi scope untuk manampilkan yang pencarian disesuaikan dengan jenis DATABASE
+    // apakah DB pgsql atau Mysql
+    public function scopeFilter($query, $filter)
+    {
+        if (isset($filter['month']) && $month = $filter['month'])
+        {
+            if (env('DB_CONNECTION') == 'pgsql') {
+                $query->whereRaw('extract(month from published_at) = ?', [$month]);
+            }
+            else {
+                $query->whereRaw('month(published_at) = ?', [$month]);
+            }
+        }
+
+        if (isset($filter['year']) && $year = $filter['year'])
+        {
+            if (env('DB_CONNECTION') == 'pgsql') {
+                $query->whereRaw('extract(year from published_at) = ?', [$year]);
+            }
+            else {
+                $query->whereRaw('year(published_at) = ?', [$year]);
+            }
+        }
+        
+
         // check if any term entered
-        if ($term) 
+        if (isset($filter['term']) && $term = strtolower($filter['term']))
         {
             $query->where(function($q) use ($term){
                 //tambah pencarian dengan relasi ke author and category

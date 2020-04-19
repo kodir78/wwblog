@@ -21,8 +21,8 @@ class BlogController extends Controller
         $posts = Post::with('author', 'category', 'tags')
                         ->latestFirst()
                         ->published()
-                        ->filter(request('term'))
-                        ->take(6)
+                        ->filter(request()->only(['term', 'year', 'month']))
+                        // ->take(6)
                         ->paginate($this->limit);
                         //->get();
         

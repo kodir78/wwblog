@@ -65,11 +65,11 @@
             <h4 class="widget-title">Archive</h4>
             <div class="widget-link">
                 <ul class="sidebar-link">
-                    @foreach ($categories as $category)
-                    <li>
-                        <a href="{{ route('category', $category->slug) }}">{{ $category->title }}</a>
-                        <span>{{ $category->posts->count() }}</span>
-                    </li>
+                    @foreach($archives as $archive)
+                        <li>
+                            <a href="{{ route('blog', ['month' => $archive->month, 'year' => $archive->year]) }}">{{ month_name($archive->month) . " " . $archive->year }}</a>
+                            <span class="badge pull-right">{{ $archive->post_count }}</span>
+                        </li>
                     @endforeach
                 </ul>
             </div>
