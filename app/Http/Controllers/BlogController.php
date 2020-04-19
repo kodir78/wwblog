@@ -85,10 +85,16 @@ class BlogController extends Controller
 
     public function show(Post $post)
     {
+        // pada function ini kita kelola juga comments
+        // before
+       // $post->increment('view_count');
+
+        //after
         $title = "Detail Post";
-                
         $post->increment('view_count');
-        return view('frontend.sikka.show', compact('post', 'tags'));
+        $postComments = $post->comments()->simplepaginate(3);
+
+        return view('frontend.sikka.show', compact('post', 'postComments', 'tags'));
     }
     
     public function allposts(Post $posts)

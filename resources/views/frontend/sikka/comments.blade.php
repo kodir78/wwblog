@@ -4,7 +4,7 @@
     </div>
     <div class="latest-comments">
         <ul>
-            @foreach ($post->comments as $comment)
+            @foreach ($postComments as $comment)
             <li>
                 <div class="comments-box main-comments d-flex">
                     <div class="comments-avatar">
@@ -38,6 +38,15 @@
             </li>
             @endforeach
         </ul>
+        <div class="row">
+            <div class="col-xl-12 text-center">
+                <nav class="course-pagination mb-30" aria-label="Page navigation example">
+                    <ul class="pagination justify-content-start ">
+                        {{$postComments->appends(Request::all())->links()}}
+                    </ul>
+                </nav>
+            </div>
+        </div>
     </div>
     <div class="post-comments-form">
         <div class="section-title mb-30">
