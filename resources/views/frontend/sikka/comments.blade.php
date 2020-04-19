@@ -1,9 +1,10 @@
-<div class="post-comments post-comments-padding white-bg mt-70 mb-30">
+<div class="post-comments post-comments-padding white-bg mt-70 mb-30" id="post-comments">
     <div class="section-title mb-20">
-        <h2>Comments (3)</h2>
+        <h2>{{ $post->commentsNumber('Comment') }}</h2>
     </div>
     <div class="latest-comments">
         <ul>
+            @foreach ($post->comments as $comment)
             <li>
                 <div class="comments-box main-comments d-flex">
                     <div class="comments-avatar">
@@ -11,13 +12,14 @@
                     </div>
                     <div class="comments-text">
                         <div class="avatar-name">
-                            <h5>Kemerun</h5>
+                            <h5>{{ $comment->author_name }} <small>{{ $comment->date }}</small></h5>
                         </div>
-                        <p>Norem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore worth.</p>
+                        {{-- {{ $comment->body }} --}}
+                        {!! $comment->body_html !!}
                         <a href="#">Reply</a>
                     </div>
                 </div>
-                <ul class="comments-reply">
+                {{-- <ul class="comments-reply">
                     <li>
                         <div class="comments-box d-flex">
                             <div class="comments-avatar">
@@ -32,22 +34,9 @@
                             </div>
                         </div>
                     </li>
-                </ul>
+                </ul> --}}
             </li>
-            <li>
-                <div class="comments-box main-comments d-flex">
-                    <div class="comments-avatar">
-                        <img src="/assets/frontend/sikka/img/comments/comments_03.png" alt="">
-                    </div>
-                    <div class="comments-text">
-                        <div class="avatar-name">
-                            <h5>Naymer JR</h5>
-                        </div>
-                        <p>Norem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore worth.</p>
-                        <a href="#">Reply</a>
-                    </div>
-                </div>
-            </li>
+            @endforeach
         </ul>
     </div>
     <div class="post-comments-form">

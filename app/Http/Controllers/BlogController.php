@@ -18,7 +18,7 @@ class BlogController extends Controller
     {
         
         //$sliders = Slider::all();
-        $posts = Post::with('author', 'category', 'tags')
+        $posts = Post::with('author', 'category', 'tags', 'comments')
                         ->latestFirst()
                         ->published()
                         ->filter(request()->only(['term', 'year', 'month']))
@@ -35,7 +35,7 @@ class BlogController extends Controller
         $categoryName = $category->title;
         
         $posts = $category->posts()
-                        ->with('author', 'tags')
+                        ->with('author', 'tags', 'comments')
                         ->latestFirst()
                         ->published()
                         ->take(6)
@@ -50,7 +50,7 @@ class BlogController extends Controller
         $tagName = $tag->title;
         
         $posts = $tag->posts()
-                    ->with('author', 'category')
+                    ->with('author', 'category', 'comments')
                     ->latestFirst()
                     ->published()
                     ->take(6)
@@ -65,10 +65,10 @@ class BlogController extends Controller
         $title = "Author";
         $authorName = $author->name;
         $posts = $author->posts()
+                        ->with('category', 'tags', 'comments')
                         ->latestFirst()
                         ->published()
                         ->take(6)
-                        ->with('category')
                         ->paginate($this->limit);
         
         return view("frontend.sikka.index", compact('posts', 'authorName', 'title'));

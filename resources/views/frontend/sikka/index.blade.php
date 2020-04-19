@@ -56,7 +56,7 @@
                                     </span>
                                     <span>
                                         <i class="fa fa-comments"></i>
-                                        <a href="#">19 Comments</a>
+                                        <a href="{{ route('blog.show', $post->slug) }}#post-comments">{{ $post->commentsNumber('Comment') }}</a>
                                     </span>
                                 </div>
                                 <div class="events-view-btn mt-10">

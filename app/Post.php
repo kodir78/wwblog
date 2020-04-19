@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
@@ -189,7 +190,7 @@ class Post extends Model
     {
         $commentsNumber = ($tmp = $this->comments) ? $tmp->count() : 0;
 
-        return $commentsNumber . " " . str_plural($label, $commentsNumber);
+        return $commentsNumber . " " . Str::plural($label, $commentsNumber);
     }
 
     public function createComment(array $data)

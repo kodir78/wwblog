@@ -62,7 +62,7 @@
                                             </span>&nbsp;&nbsp;
                                             <span>
                                                 <i class="fa fa-comments"></i>
-                                                <a href="#">19 Comments</a>
+                                                <a href="#post-comments">{{ $post->commentsNumber('Comment') }}</a>
                                             </span>
                                         </div>
                                     </div>
