@@ -5,7 +5,7 @@
     <a href="index3.html" class="brand-link">
       <img src="/assets/backend/adminlte/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light">My Blog</span>
     </a>
 
     <!-- Sidebar -->
@@ -56,7 +56,7 @@
               </li>
             </ul>
           </li>
-          @role(['admin','editor'])
+          @if (check_user_permissions(request(), "Category@index"))
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
@@ -80,8 +80,8 @@
               </li>
             </ul>
           </li>
-          @endrole
-          @role('admin')
+          @endif
+          @if (check_user_permissions(request(), "User@index"))
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
@@ -105,13 +105,13 @@
               </li>
             </ul>
           </li>
-          @endrole
-          <li class="nav-item">
+          @endif
+          {{-- <li class="nav-item">
             <form action="{{route("logout")}}" method="POST">
               @csrf
               <button class="dropdown-item nav-link btn btn-default" style="cursor:pointer"><i class="fas fa-sign-out-alt text-danger"></i> <strong>Logout</strong></button>
           </form>
-          </li>
+          </li> --}}
           
         </ul>
       </nav>

@@ -88,6 +88,8 @@ class ComposerStaticInit5dbecb24e2cc734ad2753e8532fa5ebd
         '4a1f389d6ce373bda9e57857d3b61c84' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/helpers.php',
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
         '6b34c85f7b1ad6faa15aa12109e030f2' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/functions.php',
+        '1d17f7ae1228feb316fb5276b00c4146' => __DIR__ . '/../..' . '/app/Helpers/permissions.php',
+        '0aaec83e00d46dbfa519f4647557316e' => __DIR__ . '/../..' . '/app/Helpers/date.php',
     );
 
     public static $prefixLengthsPsr4 = array (

@@ -87,4 +87,6 @@ return array(
     '4a1f389d6ce373bda9e57857d3b61c84' => $vendorDir . '/barryvdh/laravel-debugbar/src/helpers.php',
     'ed962a97bd972bc82007176b647d4e36' => $vendorDir . '/facade/ignition/src/helpers.php',
     '6b34c85f7b1ad6faa15aa12109e030f2' => $vendorDir . '/realrashid/sweet-alert/src/functions.php',
+    '1d17f7ae1228feb316fb5276b00c4146' => $baseDir . '/app/Helpers/permissions.php',
+    '0aaec83e00d46dbfa519f4647557316e' => $baseDir . '/app/Helpers/date.php',
 );

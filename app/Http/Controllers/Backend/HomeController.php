@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\User;
 
 class HomeController extends BackendController
 {
@@ -14,10 +16,21 @@ class HomeController extends BackendController
      */
     public function index()
     {
-        $a = config('cms.default_category_id');
-
-        //Alert::success('Welcome', 'Login Success');
-        // return view('backend.stisla.dashboard');
-        return view('backend.adminlte.dashboard', compact('a'));
+        return view('backend.adminlte.home.index');
     }
+
+    public function edit(Request $request)
+    {
+        $user = $request->user();
+        return view('backend.adminlte.home.edit', compact('user'));
+    }
+
+    public function update(Requests\AccountUpdateRequest $request)
+    {
+        $user = $request->user();
+        $user->update($request->all());
+
+        return redirect()->back()->with('message','Account was update successfully');
+    }
+    
 }

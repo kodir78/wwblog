@@ -15,13 +15,27 @@
         
         <tr>
             <td>
-                <a title="Edit" class="btn btn-xs btn-default edit-row" href="{{route('posts.edit', $post->id)}}">
-                    <i class="fas fa-edit"></i>
-                </a>&nbsp;&nbsp;
                 <form  class="d-inline" action="{{route('posts.destroy', $post->id)}}" method="POST">
                     @csrf
                     @method('delete')
-                    <button title="Move Trash" type="submit" class="btn btn-danger btn-xs delete-row"><i class="fas fa-trash-alt"></i></button>
+                @if (check_user_permissions($request, "Posts@edit", $post->id))
+                    <a href="{{route('posts.edit', $post->id)}}" title="Edit" class="btn btn-xs btn-default edit-row" >
+                        <i class="fas fa-edit"></i>
+                    </a>&nbsp;&nbsp;
+               @else
+                    <a href="#" title="Not Autorized" class="btn btn-xs btn-default edit-row disabled" >
+                        <i class="fas fa-edit"></i>
+                    </a>&nbsp;&nbsp;
+                @endif
+                @if (check_user_permissions($request, "Posts@destroy", $post->id))
+                    <button title="Move Trash" type="submit" class="btn btn-danger btn-xs delete-row">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                @else
+                    <button title="Not Autorized" onclick="return false" class="btn btn-danger btn-xs delete-row disabled">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                @endif
                 </form>
             </td>
             <td>{{ $post->title }}</td>

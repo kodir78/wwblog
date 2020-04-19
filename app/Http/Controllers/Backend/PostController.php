@@ -44,7 +44,7 @@ class PostController extends BackendController
                 $posts = Post::where("title", "LIKE",
                 "%$filterKeyword%")->paginate($this->limit);
             }
-            $postCount = Post::onlyTrashed()->count();
+            $postCount = ($tmp = Post::onlyTrashed()) ? $tmp->count() : 0;
             $onlyTrashed = TRUE;
         } 
         elseif ($status == 'published') {
@@ -55,7 +55,7 @@ class PostController extends BackendController
                 $posts = Post::published()->where("title", "LIKE",
                 "%$filterKeyword%")->paginate($this->limit);
             }
-            $postCount = Post::published()->count();
+            $postCount = ($tmp = Post::published()) ? $tmp->count() : 0;
             
         }
         elseif ($status == 'scheduled') {
@@ -66,7 +66,7 @@ class PostController extends BackendController
                 $posts = Post::scheduled()->where("title", "LIKE",
                 "%$filterKeyword%")->paginate($this->limit);
             }
-            $postCount = Post::scheduled()->count();
+            $postCount = ($tmp = Post::scheduled()) ? $tmp->count() : 0;
             
         }
         elseif ($status == 'draft') {
@@ -77,7 +77,18 @@ class PostController extends BackendController
                 $posts = Post::draft()->where("title", "LIKE",
                 "%$filterKeyword%")->paginate($this->limit);
             }
-            $postCount = Post::draft()->count();
+            $postCount = ($tmp = Post::draft()) ? $tmp->count() : 0;
+            
+        }
+        elseif ($status == 'own') {
+            # Tampilkan semua data aktif
+            $filterKeyword = $request->get('keyword');
+            $posts = $request->user()->posts()->with('category', 'author')->latest()->paginate($this->limit);
+            if($filterKeyword){
+                $posts = $request->user()->posts()->where("title", "LIKE",
+                "%$filterKeyword%")->paginate($this->limit);
+            }
+            $postCount = ($tmp = $request->user()->posts()) ? $tmp->count() : 0;
             
         }
         else {
@@ -100,7 +111,7 @@ class PostController extends BackendController
     private function statusList($request)
     {
         return [
-            //'own'       => ($tmp = $request->user()->posts()) ? $tmp->count() : 0,
+            'own'       => ($tmp = $request->user()->posts()) ? $tmp->count() : 0,
             'all'       => Post::count(),
             'published' => ($tmp = Post::published()) ? $tmp->count() : 0,
             'scheduled' => ($tmp = Post::scheduled()) ? $tmp->count() : 0,
@@ -286,7 +297,7 @@ class PostController extends BackendController
                 }
             }
             
-            public function kill($id)
+            public function forceDestroy($id)
             {
                 $posts = Post::withTrashed()->findOrFail($id);
                 // cara kedua

@@ -52,11 +52,14 @@ Auth::routes([
 Route::group(['middleware' => 'auth'], function()
 {
     Route::get('/home', 'Backend\HomeController@index')->name('home');
+    Route::get('/edit-account', 'Backend\HomeController@edit');
+    Route::put('/edit-account', 'Backend\HomeController@update');
+   
     Route::get('/backend/posts/{post}/restore', [
         'uses' => 'Backend\PostController@restore',
         'as' => 'posts.restore'
         ]);
-    Route::delete('/backend/posts/{post}/kill', 'Backend\PostController@kill')->name('posts.kill');
+    Route::delete('/backend/posts/{post}/forceDestroy', 'Backend\PostController@forceDestroy')->name('posts.forceDestroy');
     Route::resource('/backend/posts', 'Backend\PostController');
 
     Route::resource('/backend/categories', 'Backend\CategoryController');

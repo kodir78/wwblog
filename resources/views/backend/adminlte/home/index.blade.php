@@ -2,8 +2,6 @@
 @section("title") Home Dashboard @endsection
 @section('styles')
 <!-- Start styles Libraies -->
-  <!-- Jasny Bootstrap 4 -->
-<link rel="stylesheet" href="/assets/backend/adminlte/plugins/jasny-bootstrap/4.0.0/css/jasny-bootstrap.min.css">
 <!-- End styles Libraies -->
 @endsection
 <!-- Start Content -->
@@ -45,25 +43,8 @@
       <div class="card-body">
         Start creating your amazing application! <br><br>
         
-        Coba if <br><br>
-        {{ $a }} <br>
-
-        @if ($a == 1)
-            ini adalah idi default 
-        @else
-            Lanjut
-        @endif
-        <br><br>
-        <div class="fileinput fileinput-new" data-provides="fileinput">
-          <div class="fileinput-new img-thumbnail" style="width: 200px; height: 150px;">
-            <img src="/assets/backend/adminlte/dist/img/no_image.png"  alt="...">
-          </div>
-          <div class="fileinput-preview fileinput-exists img-thumbnail" style="max-width: 200px; max-height: 150px;"></div>
-          <div>
-            <span class="btn btn-outline-secondary btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="..."></span>
-            <a href="#" class="btn btn-outline-secondary fileinput-exists" data-dismiss="fileinput">Remove</a>
-          </div>
-        </div>
+       
+       
       </div>
       <!-- /.card-body -->
       <div class="card-footer">
@@ -78,12 +59,5 @@
 </div>
 <!-- /.content-wrapper -->
 <!-- End Content -->
-@section('footer-scripts')
-<!-- Library Specific JS File -->
-<!-- Jasny Bootstrap 4 -->
-<script src="/assets/backend/adminlte/plugins/jasny-bootstrap/4.0.0/js/jasny-bootstrap.min.js"></script>
-<!-- Page Specific JS File -->
-
-@endsection
 @endsection
 

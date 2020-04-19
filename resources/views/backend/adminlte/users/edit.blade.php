@@ -1,5 +1,5 @@
 @extends('backend.adminlte.layouts.main')
-@section("title") Create User @endsection
+@section("title") Edit User @endsection
 @section('styles')
 <!-- Start styles Libraies -->
 <!-- Select2 -->
@@ -57,6 +57,15 @@
                   @enderror
                 </div>
                 <!-- /.form-group -->
+                <div class="form-group">
+                  <label for="slug">Slug</label>
+                  <input id="slug" name="slug" value="{{old('slug') ? old('slug') : $user->slug}}" type="text" class="form-control @error('slug') is-invalid @enderror" placeholder="Slug" readonly>
+                  @error('slug')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                </div>
                 <!-- text input -->
                 <div class="form-group">
                   <label for="email">E-Mail</label>
@@ -106,6 +115,29 @@
                 @enderror
               </div>
               <!-- /.form-group -->
+              <div class="form-group {{ $errors->has('role') ? 'has-error' : '' }}">
+                {!! Form::label('role') !!}
+                @if ($user->exists && ($user->id == config('cms.default_user_id') || isset($hideRoleDropdown)))
+                    {!! Form::hidden('role', $user->roles->first()->id) !!}
+                    <p class="form-control-static">{{ $user->roles->first()->display_name }}</p>
+                @else
+                    {!! Form::select('role', App\Role::pluck('display_name', 'id'),                                                                        $user->exists ? $user->roles->first()->id : null, ['class' => 'form-control', 'placeholder' => 'Choose a role']) !!}
+                @endif
+    
+                @if($errors->has('role'))
+                    <span class="help-block">{{ $errors->first('role') }}</span>
+                @endif
+            </div>
+            <div class="form-group">
+              <label for="bio">Bio</label>
+              <textarea name="bio" id="bio"  rows="5" class="form-control">{{ $user->bio }}</textarea>
+                {{-- {!! Form::label('bio') !!}
+                {!! Form::textarea('bio', null, ['rows' => 5, 'class' => 'form-control']) !!}
+    
+                @if($errors->has('bio'))
+                    <span class="help-block">{{ $errors->first('bio') }}</span>
+                @endif --}}
+            </div>
             </div>
             <!-- /.card-body -->
             
@@ -138,7 +170,7 @@
             <!-- /.card body -->
             <div class="card-footer float-left">
               <button type="submit" class="btn btn-primary float-left">Update</button>
-              <a href="{{ route('categories.index') }}" class="btn btn-info float-right">Cancel</a>&nbsp;&nbsp;
+              <a href="{{ route('users.index') }}" class="btn btn-info float-right">Cancel</a>&nbsp;&nbsp;
             </div>
           </div>
           <!-- /.card -->

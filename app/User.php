@@ -6,14 +6,13 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laratrust\Traits\LaratrustUserTrait;
-// use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 
 class User extends Authenticatable
 {
     use LaratrustUserTrait; // add this trait to your user model
     use Notifiable;
-    // use softDeletes;
     
     /**
     * The attributes that are mass assignable.
@@ -55,14 +54,21 @@ class User extends Authenticatable
      {
          return $this->hasMany(Slider::class, 'created_by');
      } 
+
     public function categories()
     {
-        return $this->hasMany('App\Category');
+        return $this->hasMany(Category::class);
     }
     
     // SEO 
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    //fungsi enkripsi password
+    public function setPasswordAttribute($value)
+    {
+        if (! empty($value)) $this->attributes['password'] = crypt($value, '');
     }
 }

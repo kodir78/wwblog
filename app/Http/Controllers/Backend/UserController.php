@@ -8,7 +8,6 @@ use App\Http\Requests;
 use Illuminate\Support\Str;
 
 use App\User;
-use App\Post;
 
 class UserController extends BackendController
 {
@@ -32,8 +31,8 @@ class UserController extends BackendController
     */
     public function create()
     {
-        $users = new User();
-        return view('backend.adminlte.users.create', compact('users'));
+        $user = new User();
+        return view('backend.adminlte.users.create', compact('user'));
     }
     
     /**
@@ -44,11 +43,13 @@ class UserController extends BackendController
     */
     public function store(Requests\UserStoreRequest $request)
     {
-       
-        $data = $request->all();
-        $data['password'] = bcrypt($data['password']);
         
-        User::create($data);
+        $user =  User::create($request->all());
+        
+        // simpan data roles ke roles_user dengan "attach"
+        $user->roles()->attach($request->role);
+        
+        // $user->attachRole($request->role);
         
         return redirect('/backend/users')->with('message','New User was created successfully');
         
@@ -87,27 +88,13 @@ class UserController extends BackendController
     public function update(Requests\UserUpdateRequest $request, $id)
     {
         $user = User::findOrFail($id);
+        $user->update($request->all());
         
+        $user->detachRoles();
+        //$user->attachRole($request->role);
         
-        if ($request->input('password')) {
-            # Jika password diisi
-            $user_data = [
-                'name' => $request->name,
-                'slug' => Str::slug($request->name),
-                'status' => $request->status,
-                'password' => bcrypt($request->password),
-                // 'avatar' => 'public/uploads/images/users/'.$new_image,
-            ];
-        } else {
-            # jika password tidak diisi
-            $user_data = [
-                'name' => $request->name,
-                'slug' => Str::slug($request->name),
-                'status' => $request->status,
-            ];
-        }
-        
-        $user->update($user_data);
+        // Update data roles ke roles_user dengan "sync"
+        $user->roles()->sync($request->role);
         
         return redirect('/backend/users')->with('message','User was update successfully');
     }
@@ -121,10 +108,10 @@ class UserController extends BackendController
     public function destroy(Requests\UserDestroyRequest $request, $id)
     {
         $user = User::findOrFail($id);
-
+        
         $deleteOption = $request->delete_option;
         $selectedUser = $request->selected_user;
-
+        
         if ($deleteOption == "delete") {
             // delete user posts
             $user->posts()->withTrashed()->forceDelete();
@@ -132,9 +119,9 @@ class UserController extends BackendController
         elseif ($deleteOption == "attribute") {
             $user->posts()->withTrashed()->update(['author_id' => $selectedUser]);
         }
-
+        
         $user->delete();
-
+        
         return redirect("/backend/users")->with("message", "User was deleted successfully!");
         // return redirect()->back()->with('message', 'Your User Was Deleted');
     }

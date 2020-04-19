@@ -26,12 +26,12 @@ class UserStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => "required|min:3|max:100",
-            'slug'     => 'required|unique:users',
-            "email" => "required|email",
-            // 'user_roles' => 'required',
-            "password" => "required",
-            "password_confirmation" => "required|same:password"
+            'name' => 'required|min:3|max:100',
+            'slug'  => 'required|unique:users',
+            'email' => 'required|email|unique:users',
+            'role' => 'required',
+            'password' => 'required|confirmed',
+            //'password_confirmation' => 'required|same:password'
         ];
     }
 }
