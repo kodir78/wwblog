@@ -17,8 +17,12 @@ class CategoriesTableSeeder extends Seeder
 
         DB::table('categories')->insert([
             [
-                'title' => 'Web Desin',
-                'slug' => 'web-desain'
+                'title' => 'Uncategorized',
+                'slug' => 'uncategorized'
+            ],
+            [
+                'title' => 'Web Design',
+                'slug' => 'web-design'
             ],
             [
                 'title' => 'Tips and Tricks',
@@ -29,24 +33,23 @@ class CategoriesTableSeeder extends Seeder
                 'slug' => 'build-apps'
             ],
             [
-                'title' => 'News',
-                'slug' => 'news'
-            ],
-            [
                 'title' => 'Freebies',
                 'slug' => 'freebies'
             ],
         ]);
             // update the posts data
-
-        for ($post_id = 1; $post_id <37; $post_id++)
+            //for ($post_id = 1; $post_id <37; $post_id++)
+            // Perbaikan
+        foreach (Post::pluck('id') as $postId)
 
         {
-            $category_id = rand(1, 5);
+            // Kumpulkan id categori dari database
+            $categories = Category::pluck('id');
+            $categoryId = $categories[rand(0, $categories->count()-1)];
             
             DB::table('posts')
-            ->where('id', $post_id)
-            ->update(['category_id' => $category_id]);
+            ->where('id', $postId)
+            ->update(['category_id' => $categoryId]);
         }            
     }
 }

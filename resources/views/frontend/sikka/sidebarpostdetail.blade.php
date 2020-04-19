@@ -61,7 +61,20 @@
                 </ul>
             </div>
         </div>
-        <div class="widget mb-40 widget-padding banner-padding white-bg">
+         <div class="widget mb-40 widget-padding white-bg">
+            <h4 class="widget-title">Archive</h4>
+            <div class="widget-link">
+                <ul class="sidebar-link">
+                    @foreach ($categories as $category)
+                    <li>
+                        <a href="{{ route('category', $category->slug) }}">{{ $category->title }}</a>
+                        <span>{{ $category->posts->count() }}</span>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+        {{-- <div class="widget mb-40 widget-padding banner-padding white-bg">
             <div class="banner-thumb pos-relative">
                 <img src="/assets/frontend/sikka/img/courses/course_banner_01.png" alt="">
                 <div class="bannger-text">
@@ -71,6 +84,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
