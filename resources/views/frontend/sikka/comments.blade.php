@@ -51,23 +51,53 @@
     <div class="post-comments-form">
         <div class="section-title mb-30">
             <h2>Leave a Reply</h2>
+            <small><span class="required text-danger">*</span>
+            <em>Indicates required fields</em></small>
         </div>
-        <form action="#">
-            <div class="row">
-                <div class="col-xl-4 col-lg-4 col-md-4">
-                    <input type="text" placeholder="Your Name">
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4">
-                    <input type="text" placeholder="Your Email">
-                </div>
-                <div class="col-xl-4 col-lg-4  col-md-4">
-                    <input type="text" placeholder="Your Email">
-                </div>
-                <div class="col-xl-12">
-                    <textarea name="comments" id="comments" cols="30" rows="10" placeholder="Your Comments"></textarea>
-                    <button class="btn blue-bg" type="submit">send reply</button>
-                </div>
+        @if(session('message'))
+            <div class="alert alert-info">
+                {{ session('message') }}
             </div>
-        </form>
+        @endif
+        {!! Form::open(['route' => ['blog.comments', $post->slug]])  !!}
+        <div class="row">
+            <div class="col-xl-4 col-lg-4 col-md-4 required {{ $errors->has('author_name') ? 'has-error' : '' }}">
+                <label for="author_name">Your Name <small class="text-danger">*</small></label>
+                {!! Form::text('author_name', null, ['class' => 'form-control', 'placehoder' => 'Your Name']) !!}
+                @if($errors->has('author_name'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('author_name') }}</strong>
+                    </span>
+                @endif
+                
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 form-group required {{ $errors->has('author_email') ? 'has-error' : '' }}">
+                <label for="author_email">Your Email <small class="text-danger">*</small></label>
+                {!! Form::text('author_email', null, ['class' => 'form-control', 'placehoder' => 'Your Email']) !!}
+                @if($errors->has('author_email'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('author_email') }}</strong>
+                </span>
+                @endif
+            </div>
+            <div class="col-xl-4 col-lg-4  col-md-4">
+                <label for="author_website">Website</label>
+                {!! Form::text('author_url', null, ['class' => 'form-control', 'placehoder' => 'Website']) !!}
+                
+            </div>
+            <div class="col-xl-12 form-group required {{ $errors->has('body') ? 'has-error' : '' }}">
+                <label for="comments">Comment <small class="text-danger">*</small></label>
+                {!! Form::textarea('body', null, ['row' => 6, 'class' => 'form-control']) !!}
+                @if($errors->has('body'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('body') }}</strong>
+                    </span>
+                @endif
+            </div>
+            <div class="col-xl-12 form-group">
+                <button class="btn blue-bg" type="submit">send</button>
+            </div>
+        </div>
+        {!! Form::close() !!}
     </div>
 </div>

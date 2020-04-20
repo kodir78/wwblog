@@ -92,7 +92,7 @@ class BlogController extends Controller
         //after
         $title = "Detail Post";
         $post->increment('view_count');
-        $postComments = $post->comments()->simplepaginate(3);
+        $postComments = $post->comments()->paginate(3);
 
         return view('frontend.sikka.show', compact('post', 'postComments', 'tags'));
     }
