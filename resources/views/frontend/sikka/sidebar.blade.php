@@ -40,7 +40,7 @@
                                     <a href="{{ route('blog.show', $post->slug) }}">{{ $post->title }}</a>
                                 </h4>
                                 <div class="widget-advisors-name">
-                                    <span>{{ $post->date }}</span></span>
+                                    <span>{{ $post->date }}</span>
                                 </div>
                             </div>
                         </div>

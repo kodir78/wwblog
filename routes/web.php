@@ -42,10 +42,11 @@ Route::get('/tag/{tag}', [
     'uses' => 'BlogController@tag',
     'as'   => 'tag'
 ]);
-Route::get('/search', [
-    'uses' => 'BlogController@search',
-    'as' => 'blog.search'
+Route::get('/contact', [
+    'uses' => 'BlogController@contact',
+    'as' => 'contact'
     ]);
+
 // End Route Bagian Frontend
 
 //Route::get('/search','BlogController@search')->name('blog.search');

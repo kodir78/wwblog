@@ -78,7 +78,7 @@
                 </div>
             </div>
             {{-- Sidebar post --}}
-            @include('frontend.sikka.sidebarpostdetail')
+            @include('frontend.sikka.sidebar')
             {{-- Sidebar post end --}}
         </div>
     </div>

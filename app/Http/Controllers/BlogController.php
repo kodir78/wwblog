@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon;
 use App\Post;
 use App\User;
 use App\Tag;
@@ -16,17 +17,17 @@ class BlogController extends Controller
     protected $limit = 6;
     public function index(Post $posts)
     {
-        
+        $date = Carbon\Carbon::now();
         //$sliders = Slider::all();
         $posts = Post::with('author', 'category', 'tags', 'comments')
                         ->latestFirst()
                         ->published()
                         ->filter(request()->only(['term', 'year', 'month']))
-                        // ->take(6)
-                        ->paginate($this->limit);
-                        //->get();
+                        ->take(6)
+                        // ->paginate($this->limit);
+                        ->get();
         
-        return view('frontend.sikka.index', compact('posts'));
+        return view('frontend.kz.index', compact('posts', 'date'));
     }
     
     public function category(Category $category)
@@ -41,7 +42,7 @@ class BlogController extends Controller
                         ->take(6)
                         ->paginate($this->limit);
         
-        return view("frontend.sikka.index", compact('posts', 'categoryName', 'title'));
+        return view("frontend.kz.allpost", compact('posts', 'categoryName', 'title'));
         
     }
     public function tag(Tag $tag)
@@ -56,7 +57,7 @@ class BlogController extends Controller
                     ->take(6)
                     ->paginate($this->limit);
         
-        return view("frontend.sikka.index", compact('posts', 'tagName', 'title'));
+        return view("frontend.kz.allpost", compact('posts', 'tagName', 'title'));
         
     }
     // list berdasrkan author belum selesai
@@ -71,15 +72,7 @@ class BlogController extends Controller
                         ->take(6)
                         ->paginate($this->limit);
         
-        return view("frontend.sikka.index", compact('posts', 'authorName', 'title'));
-        
-    }
-
-    public function slider(Slider $slider)
-    {
-        $sliderName = $slider->slug;
-
-        return view("frontend.sikka.index", compact('posts', 'sliderName', 'title'));
+        return view("frontend.kz.allpost", compact('posts', 'authorName', 'title'));
         
     }
 
@@ -94,18 +87,23 @@ class BlogController extends Controller
         $post->increment('view_count');
         $postComments = $post->comments()->paginate(3);
 
-        return view('frontend.sikka.show', compact('post', 'postComments', 'tags'));
+        return view('frontend.kz.show', compact('post', 'postComments', 'tags'));
     }
     
     public function allposts(Post $posts)
     {
-        $categories = Category::all();
-        $posts = Post::with('author')
-        ->latest()
-        ->take(6)
-        ->paginate($this->limit);
-        //->get();
-        return view('frontend.sikka.gridblog', compact('posts', 'categories'));
+        $posts = Post::with('author', 'category', 'tags', 'comments')
+                        ->latestFirst()
+                        ->published()
+                        ->filter(request()->only(['term', 'year', 'month']))
+                        ->paginate($this->limit);
+        return view('frontend.kz.allpost', compact('posts'));
+    }
+
+    public function contact()
+    {
+       
+        return view('frontend.kz.contact');
     }
     
 }

@@ -139,7 +139,8 @@
 <script src="/assets/frontend/sikka/js/vendor/jquery-1.12.4.min.js"></script>
 <script src="/assets/frontend/sikka/js/popper.min.js"></script>
 <script src="/assets/frontend/sikka/js/bootstrap.min.js"></script>
-<script src="/assets/frontend/sikka/js/owl.carousel.min.js"></script>
+
+{{-- <script src="/assets/frontend/sikka/js/owl.carousel.min.js"></script> --}}
 <script src="/assets/frontend/sikka/js/isotope.pkgd.min.js"></script>
 <script src="/assets/frontend/sikka/js/one-page-nav-min.js"></script>
 <script src="/assets/frontend/sikka/js/slick.min.js"></script>

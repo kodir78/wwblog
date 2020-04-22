@@ -8,12 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="manifest" href="site.html">
-    <link rel="shortcut icon" type="image/x-icon" href="/public/assets/frontend/sikka/img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/frontend/sikka/img/favicon.png">
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
     <link rel="stylesheet" href="/assets/frontend/sikka/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/frontend/sikka/css/owl.carousel.min.css">
+    
+    {{-- <link rel="stylesheet" href="/assets/frontend/sikka/css/owl.carousel.min.css"> --}}
     <link rel="stylesheet" href="/assets/frontend/sikka/css/animate.min.css">
     <link rel="stylesheet" href="/assets/frontend/sikka/css/magnific-popup.css">
     <link rel="stylesheet" href="/assets/frontend/sikka/css/fontawesome-all.min.css">

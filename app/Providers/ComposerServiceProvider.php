@@ -26,9 +26,10 @@ class ComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         //Panggil navigations composer dari App\Views\Composers 
-        view()->composer('frontend.sikka.sidebarpostdetail', NavigationComposer::class);
+        //view()->composer('frontend.sikka.sidebarpostdetail', NavigationComposer::class);
+        view()->composer('frontend.kz.layouts.sidebar', NavigationComposer::class);
         
-        // disini diisikan service helper filter category dipindah ke NavigationComposer agar lebih rapih
+        // disini isi service helper filter category dipindah ke file App\Views\NavigationComposer agar lebih rapih
         
     }
 }
