@@ -105,5 +105,6 @@
 </section>
 <!--/ End Blog Archive -->
 <!-- Newsletter -->
+{{-- @include('frontend.kz.layouts.newsletter') --}}
 <!--/ End Newsletter -->
 @endsection

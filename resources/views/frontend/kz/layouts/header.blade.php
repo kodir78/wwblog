@@ -68,7 +68,7 @@
                                                 <li><a target="_blank" href="https://disdik.samarindakota.go.id/">Disdik Kota Samarinda</a></li>
                                             </ul>
                                         </li>	
-                                        <li><a href="{{ route('contact') }}">Contact</a>
+                                        {{-- <li><a href="{{ route('contact') }}">Contact</a> --}}
                                         </li>												
                                     </ul>	
                                     <!-- Right Bar -->

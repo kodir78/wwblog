@@ -16,7 +16,9 @@ class NavigationComposer
 
         $this->composePopularPost($view);
         
-         $this->composeArchives($view);
+        $this->composePopularPostf($view);
+        
+        $this->composeArchives($view);
 
     }
 
@@ -26,6 +28,12 @@ class NavigationComposer
         $view->with('popularPosts', $popularPosts);
     }
     
+    private function composePopularPostf(View $view)
+    {
+        $popularPostsf =  Post::published()->popular()->take(2)->get();
+        $view->with('popularPostsf', $popularPostsf);
+    }
+
     private function composeCategories(View $view)
     {
         $categories =  Category::with(['posts'=> function($query){

@@ -95,7 +95,7 @@
                                 <!-- About Widget -->
                                 <div class="single-widget about">
                                      {{-- <a href="index.html"><img src="/uploads/images/logo/logo.png" alt="logo"></a> --}}
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam olor sit amet, consectetur<a href="about.html">Read More<i class="icofont icofont-caret-right"></i></a></p>	
+                                    <p>Terus belajar untuk memberikan yang terbaik buat Keluarga, Masyarakat serta sahabat-sahabat<a href="#">#<i class="icofont icofont-caret-right"></i></a></p>	
                                     <ul class="social">
                                         <li><a href="#"><i class="icofont icofont-social-facebook"></i></a></li>
                                         <li><a href="#"><i class="icofont icofont-social-twitter"></i></a></li>
@@ -109,14 +109,14 @@
                             <div class="col-lg-2 col-md-6 col-12">
                                 <!-- Links Widget -->
                                 <div class="single-widget links">
-                                    <h2>Explore Link</h2>
+                                    <h2>Category Link</h2>
                                     <ul class="list">
-                                        <li><a href="about.html"><i class="fa fa-caret-right"></i>Who We Are</a></li>
-                                        <li><a href="portfolio.html"><i class="fa fa-caret-right"></i>Latest Portfolio</a></li>
-                                        <li><a href="services.html"><i class="fa fa-caret-right"></i>Latest Services</a></li>
-                                        <li><a href="shop.html"><i class="fa fa-caret-right"></i>Our Product</a></li>
-                                        <li><a href="faq.html"><i class="fa fa-caret-right"></i>Ask & Questions</a></li>
-                                        <li><a href="contact.html"><i class="fa fa-caret-right"></i>Contact With Us</a></li>
+                                        @foreach ($categories as $category)
+                                        <li>
+                                            <a href="{{ route('category', $category->slug) }}"><i class="fa fa-caret-right"></i> {{ $category->title }}</a>
+                                            <span>{{ $category->posts->count() }}</span>
+                                        </li>
+                                        @endforeach	
                                     </ul>
                                 </div>
                                 <!--/ End Links Widget -->
@@ -124,11 +124,20 @@
                             <div class="col-lg-3 col-md-6 col-12">
                                 <!-- Posts Widget -->
                                 <div class="single-widget posts">
-                                    <h2>Latest Posts</h2>
+                                    <h2>Popular Posts</h2>
                                     <ul>
-                                        <li><img src="/assets/frontend/kz/images/65x60.png" alt="#"><a href="blog-single.html">Modern & Creative templates for any business</a></li>
-                                        <li><img src="/assets/frontend/kz/images/65x60.png" alt="#"><a href="blog-single.html">10 Awesome Ways for Start Your Own Website</a></li>
-                                        <li><img src="/assets/frontend/kz/images/65x60.png" alt="#"><a href="blog-single.html">We Make High Quality Website Template & Themes</a></li>
+                                        @foreach ($popularPostsf as $post)
+                                        <li>
+                                            @if ($post->imageThumbUrl)
+                                                <a href="{{ route('blog.show', $post->slug) }}"><img src="{{ $post->imageThumburl }}" alt="{{ $post->title }}"></a>   
+                                            @else
+                                            <div class="post-img">
+                                                <a href="{{ route('blog.show', $post->slug) }}"><img src="/assets/frontend/kz/images/65x60.png" alt="{{ $post->title }}"></a>
+                                            </div>
+                                            @endif
+                                            <a href="{{ route('blog.show', $post->slug) }}">{{ $post->title }}</a>
+                                        </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                                 <!--/ End Posts Widget -->
@@ -136,12 +145,12 @@
                             <div class="col-lg-3 col-md-6 col-12">
                                 <!-- Address Widget -->
                                 <div class="single-widget address">
-                                    <h2>Our Address</h2>
-                                    <p>Maecenas sapien erat, porta non porttitor non, dignissim et enim.</p>
+                                    <h2>Contact</h2>
+                                    <p>Kodir Zaelani</p>
                                     <ul class="list">
-                                        <li><i class="icofont icofont-phone"></i>+990123-456-789</li>
-                                        <li><i class="icofont icofont-ui-email"></i><a href="mailto:info@yourwebsite.com">Info@yourwebsite.com</a></li>
-                                        <li><i class="icofont icofont-location-arrow"></i>022, Tropical Tour, 5th Floor, United Kingdom.</li>
+                                        {{-- <li><i class="icofont icofont-phone"></i>+990123-456-789</li> --}}
+                                        <li><i class="icofont icofont-ui-email"></i><a href="mailto:kodir.petani@gmail.com">kodir.petani@gmail.com</a></li>
+                                        <li><i class="icofont icofont-location-arrow"></i>Samarinda, Kalimantan Timur, Indonesia</li>
                                     </ul>	
                                 </div>
                                 <!--/ End Address Widget -->

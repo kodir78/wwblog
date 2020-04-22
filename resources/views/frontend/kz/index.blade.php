@@ -69,7 +69,7 @@
                         @if ($post->imageThumburl)
                         <a href="{{ route('blog.show', $post->slug) }}"><img src="{{ $post->imageThumburl }}" alt="{{ $post->title }}"></a>   
                         @else
-                        <img src="/assets/frontend/kz/images/1000x665.png" alt="#">
+                        <a href="{{ route('blog.show', $post->slug) }}"><img src="/assets/frontend/kz/images/1000x665.png" alt="{{ $post->title }}"></a>
                         @endif
                     </div>
                     <div class="blog-bottom">
@@ -110,6 +110,6 @@
 </section>
 <!--/ End Blog Archive -->
 <!-- Newsletter -->
-@include('frontend.kz.layouts.newsletter')
+{{-- @include('frontend.kz.layouts.newsletter') --}}
 <!--/ End Newsletter -->
 @endsection
