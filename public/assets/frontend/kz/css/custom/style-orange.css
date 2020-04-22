@@ -346,7 +346,7 @@ input:-webkit-autofill:focus {
 }
 /* BreadCrumbs */
 .breadcrumbs {
-	background-image: url('http://via.placeholder.com/1600x800');
+	/* background-image: url('http://via.placeholder.com/1600x800'); */
 	position: relative;
 	text-align: center;
 	padding: 166px 0 90px;
@@ -1405,7 +1405,7 @@ input:-webkit-autofill:focus {
 }
 /* Hero Creative */
 .hero-area.creative{
-	background-image:url('http://via.placeholder.com/1600x800');
+	/* background-image:url('http://via.placeholder.com/1600x800'); */
 }
 .hero-area.creative #particles2-js{
 	position:absolute;
@@ -4092,7 +4092,7 @@ input:-webkit-autofill:focus {
 =================================*/
 .newsletter {
 	position: relative;
-	background-image:url('http://via.placeholder.com/1600x500');
+	/* background-image:url('http://via.placeholder.com/1600x500'); */
 	background-size: cover;
 	background-position: center center;
 	padding: 35px 0;
