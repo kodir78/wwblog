@@ -107,7 +107,7 @@ class PostController extends BackendController
         return view('backend.adminlte.posts.index', compact('posts', 'postCount', 'Pagetitle', 'onlyTrashed', 'statusList'));
         
     }
-
+    
     private function statusList($request)
     {
         return [
@@ -147,8 +147,12 @@ class PostController extends BackendController
         // agar dapat menyimpan tags ke database, tampung create post ke variabel $newpost
         $newpost = $request->user()->posts()->create($data);
         
+    
+        $newpost->createTags($data["post_tags"]);
+        
+        
         // simpan data tags ke posts_tags dengan "attach"
-        $newpost->tags()->attach($request->tags);
+        //$newpost->tags()->attach($request->post_tags);
         
         Alert::success('Post succesfully created', 'Create Success');
         return redirect()->route('posts.index')->with('message','Post succesfully created');
@@ -249,9 +253,11 @@ class PostController extends BackendController
                 // dd('post');
                 
                 $post->update($data);
-
+                
                 // simpan data hasil edit ke posts_tags dengan "sync"
-                $post->tags()->sync($request->tags);
+                //$post->tags()->sync($request->post_tags);
+                
+                $post->createTags($data['post_tags']);
 
                 // Jika gambar lama ada maka lakukan hapus gambar
                 if ($oldImage !== $post->image) {
@@ -303,10 +309,10 @@ class PostController extends BackendController
                 // cara kedua
                 // $posts = Post::witTrashed()->where('id', $id)->first();
                 $posts->forceDelete();
-
+                
                 // hapus file gambar
                 $this->removeImage($posts->image);
-
+                
                 Alert::success('Post succesfully Delete Permanent', 'Delete Success');
                 
                 return redirect('/backend/posts?status=trash')->with('message', 'Post permanently deleted');

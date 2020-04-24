@@ -18,7 +18,10 @@ return [
     | are going to be used are the ones inside the 'user_models' array.
     |
     */
-    'use_morph_map' => false,
+    // sbelumnya
+    //'use_morph_map' => false,
+    // sedudah di edit
+    'use_morph_map' => true,
 
     /*
     |--------------------------------------------------------------------------

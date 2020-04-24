@@ -15,6 +15,9 @@
 <link rel="stylesheet" href="/assets/backend/adminlte/plugins/jasny-bootstrap/4.0.0/css/jasny-bootstrap.min.css">
 <!-- summernote -->
 <link rel="stylesheet" href="/assets/backend/adminlte/plugins/summernote/summernote-bs4.css">
+<!-- tag editor -->
+<link rel="stylesheet" href="/assets/backend/adminlte/plugins/tag-editor/jquery.tag-editor.css">
+
 <!-- End styles Libraies -->
 @endsection
 <!-- Start Content -->
@@ -105,14 +108,14 @@
                     @foreach ($tags as $tag)
                     <option value="{{ $tag->id }}">
                       {{ $tag->title }}
-                    </option>
+                   </option>
                     @endforeach
                   </select>
                   @error('tags')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                   </span>
-                  @enderror
+                  @enderror 
                 </div>
                 <!-- /.form-group -->
               </div>
@@ -149,7 +152,27 @@
               </div>
             </div>
             <!-- /.card -->
-            
+            <!-- Tags -->
+            <div class="card card-secondary">
+              <div class="card-header">
+                <h3 class="card-title">Tags</h3>
+              </div>
+              <div class="card-body">
+                <!-- Minimal style -->
+                <div class="form-group">
+                  {{-- <label for="title">Title</label> --}}
+                  {!! Form::text('post_tags', null,['class' => 'form-control']) !!}
+                  {{-- <input id="post_tags" name="post_tags" type="text" class="form-control @error('post_tags') is-invalid @enderror" placeholder="Title"> --}}
+                  @error('post_tags')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
             <!-- Feature Image -->
             <div class="card card-secondary">
               <div class="card-header">

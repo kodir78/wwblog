@@ -56,7 +56,7 @@
               </li>
             </ul>
           </li>
-          @if (check_user_permissions(request(), "Category@index"))
+          @if (check_user_permissions(request(), "Categories@index"))
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
@@ -81,7 +81,7 @@
             </ul>
           </li>
           @endif
-          @if (check_user_permissions(request(), "User@index"))
+          @if (check_user_permissions(request(), "Users@index"))
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>

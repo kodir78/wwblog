@@ -83,13 +83,13 @@ class Post extends Model
     {
         return $query->where("published_at", "<=", Carbon::Now());
     }
-
+    
     // fungsi scope untuk manampilkan yang status draft jika field published_at > tgl sekarang
     public function scopeScheduled($query)
     {
         return $query->where("published_at", ">", Carbon::Now());
     }
-
+    
     // fungsi scope untuk manampilkan yang status draft jika field published_at kosong
     public function scopeDraft($query)
     {
@@ -101,21 +101,21 @@ class Post extends Model
         if (env('DB_CONNECTION') == 'pgsql')
         {
             return static::selectRaw('count(id) as post_count, extract(year from published_at) as year, extract(month from published_at) as month')
-                        ->published()
-                        ->groupBy('year', 'month')
-                        ->orderByRaw('min(published_at) desc')
-                        ->get();
+            ->published()
+            ->groupBy('year', 'month')
+            ->orderByRaw('min(published_at) desc')
+            ->get();
         }
         else
         {
             return static::selectRaw('count(id) as post_count, year(published_at) year, month(published_at) month')
-                        ->published()
-                        ->groupBy('year', 'month')
-                        ->orderByRaw('min(published_at) desc')
-                        ->get();
+            ->published()
+            ->groupBy('year', 'month')
+            ->orderByRaw('min(published_at) desc')
+            ->get();
         }
     }
-
+    
     // fungsi scope untuk manampilkan yang pencarian disesuaikan dengan jenis DATABASE
     // apakah DB pgsql atau Mysql
     public function scopeFilter($query, $filter)
@@ -129,7 +129,7 @@ class Post extends Model
                 $query->whereRaw('month(published_at) = ?', [$month]);
             }
         }
-
+        
         if (isset($filter['year']) && $year = $filter['year'])
         {
             if (env('DB_CONNECTION') == 'pgsql') {
@@ -140,7 +140,7 @@ class Post extends Model
             }
         }
         
-
+        
         // check if any term entered
         if (isset($filter['term']) && $term = strtolower($filter['term']))
         {
@@ -157,13 +157,18 @@ class Post extends Model
             });
         }
     }
-        
+    
     // fungsi input publishe_at jika dikosongkan berisi NULL
     public function setPublishedAtAttribute($value)
     {
         $this->attributes['published_at'] = $value ?: NULL;
     }
 
+    // fungsi menampilkan tags
+    public function getTagsListAttribute()
+    {
+        return $this->tags->pluck('title');
+    }
     // Relasi users ke posts
     public function author()
     {
@@ -185,14 +190,14 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
-
+    
     public function commentsNumber($label = 'Comment')
     {
         $commentsNumber = ($tmp = $this->comments) ? $tmp->count() : 0;
-
+        
         return $commentsNumber . " " . Str::plural($label, $commentsNumber);
     }
-
+    
     public function createComment(array $data)
     {
         $this->comments()->create($data);
@@ -223,4 +228,21 @@ class Post extends Model
             return '<span class="badge bg-success">Published</span>';
         }
     }
+    
+    public function createTags($tagString)
+    {
+        $tags = explode(",", $tagString);
+        $tagIds = [];
+        foreach ($tags as $tag)
+        {
+            $newTag = Tag::firstOrCreate(
+                ['slug' => Str::slug($tag)],
+                ['title' => ucwords(trim($tag))]
+            );
+
+            $tagIds[] = $newTag->id;
+        }
+        $this->tags()->sync($tagIds);
+    }
+
 }

@@ -38,6 +38,7 @@ class RolesTableSeeder extends Seeder
         $user1 = User::first();
         $user1->detachRole($admin);
         $user1->attachRole($admin);
+        
 
         if (env('APP_ENV') == 'local')
         {
