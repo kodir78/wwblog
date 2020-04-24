@@ -124,12 +124,11 @@ class PostController extends BackendController
     *
     * @return \Illuminate\Http\Response
     */
-    public function create()
+    public function create(Post $post)
     {
         $Pagetitle = "Create Post";
-        $tags = Tag::all();
-        $category = Category::all();
-        return view('backend.adminlte.posts.create', compact('category','tags','Pagetitle'));
+        
+        return view('backend.adminlte.posts.create', compact('post','Pagetitle'));
     }
     
     /**
@@ -148,11 +147,11 @@ class PostController extends BackendController
         $newpost = $request->user()->posts()->create($data);
         
     
-        $newpost->createTags($data["post_tags"]);
+        //$newpost->createTags($data["post_tags"]);
         
         
         // simpan data tags ke posts_tags dengan "attach"
-        //$newpost->tags()->attach($request->post_tags);
+        $newpost->tags()->attach($request->post_tags);
         
         Alert::success('Post succesfully created', 'Create Success');
         return redirect()->route('posts.index')->with('message','Post succesfully created');
@@ -230,10 +229,9 @@ class PostController extends BackendController
             {
                 $Pagetitle = "Edit Post";
                 
-                $tags = Tag::all();
                 $category = Category::all();
                 $post = Post::findOrFail($id);
-                return view('backend.adminlte.posts.edit', compact('post','category','tags', 'Pagetitle'));
+                return view('backend.adminlte.posts.edit', compact('post','category', 'Pagetitle'));
             }
             
             

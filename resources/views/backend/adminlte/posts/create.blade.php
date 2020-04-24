@@ -102,22 +102,6 @@
                   @enderror
                 </div>
                 <!-- /.form-group -->
-                <div class="form-group">
-                  <label>Tags</label>
-                  <select class="form-control select2 @error('tags') is-invalid @enderror" multiple="" name="tags[]" id="tags">
-                    @foreach ($tags as $tag)
-                    <option value="{{ $tag->id }}">
-                      {{ $tag->title }}
-                   </option>
-                    @endforeach
-                  </select>
-                  @error('tags')
-                  <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                  </span>
-                  @enderror 
-                </div>
-                <!-- /.form-group -->
               </div>
               <!-- /.card-body -->
             </div>
@@ -132,15 +116,19 @@
               </div>
               <div class="card-body">
                 <!-- Minimal style -->
-                <div class="form-group">
-                  <select class="form-control select2 {{$errors->first('category_id') ? "is-invalid": ""}}" name="category_id" id="category_id">
+                <div class="form-group @error('category_id') is-invalid @enderror ">
+                  {!! Form::select('category_id', App\Category::pluck('title', 'id'), null, ['class' => 'form-control ', 'placeholder' => 'Choose category']) !!}
+                  {{-- @if($errors->has('category_id'))
+                  <span class="help-block">{{ $errors->first('category_id') }}</span>
+                  @endif --}}
+                  {{-- <select class="form-control select2 {{$errors->first('category_id') ? "is-invalid": ""}}" name="category_id" id="category_id">
                     <option value="" holder>Select Category</option>
                     @foreach ($category as $item)
                     <option value="{{ $item->id}}">{{ $item->title }}</option>
                     @endforeach
-                  </select>
+                  </select> --}}
                   @error('category_id')
-                  <span class="invalid-feedback" role="alert">
+                  <span class="help-block" role="alert">
                     <strong>{{ $message }}</strong>
                   </span>
                   @enderror
