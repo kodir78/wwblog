@@ -77,6 +77,26 @@
                   @enderror
                 </div>
                 <!-- /.form-group -->
+                {{-- <div class="form-group">
+                  <label for="email">Role</label>
+                  <div class="form-check">
+                    <input class="form-check-input {{$errors->first('role') ? "is-invalid" : ""}}" type="checkbox" {{in_array("ADMIN", json_decode($user->role)) ?"checked" : ""}} name="role[]" id="ADMIN" value="ADMIN">
+                    <label class="form-check-label" for="ADMIN">Administrator</label>
+                  </div><div class="form-check">
+                    <input class="form-check-input {{$errors->first('role') ? "is-invalid" : ""}}" type="checkbox" {{in_array("EDITOR", json_decode($user->role)) ? "checked" : ""}} name="role[]" name="role[]" id="EDITOR" value="EDITOR">
+                    <label class="form-check-label" for="EDITOR">Editor</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input {{$errors->first('role') ? "is-invalid" : ""}}" type="checkbox" {{in_array("AUTHOR", json_decode($user->role))? "checked" : ""}} name="role[]" id="AUTHOR" value="AUTHOR">
+                    <label class="form-check-label" for="AUTHOR">Author</label>
+                  </div>
+                  @error('role')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                </div> --}}
+                <!-- /.form-group -->
                 <div class="form-group">
                   <label class="d-block" for="status">Status</label>
                   <div class="form-check form-check-inline">
@@ -115,25 +135,19 @@
                 @enderror
               </div>
               <!-- /.form-group -->
-              <div class="form-group">
-                <label for="email">Role</label>
-                <div class="form-check">
-                  <input class="form-check-input {{$errors->first('role') ? "is-invalid" : ""}}" type="checkbox" name="role[]" id="ADMIN" value="ADMIN">
-                  <label class="form-check-label" for="ADMIN">Admin</label>
-                </div><div class="form-check">
-                  <input class="form-check-input {{$errors->first('role') ? "is-invalid" : ""}}" type="checkbox"  name="role[]" name="role[]" id="EDITOR" value="EDITOR">
-                  <label class="form-check-label" for="EDITOR">Editor</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input {{$errors->first('role') ? "is-invalid" : ""}}" type="checkbox"  name="role[]" id="AUTHOR" value="AUTHOR">
-                  <label class="form-check-label" for="AUTHOR">Author</label>
-                </div>
-                @error('role')
-                <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-              </div>
+              <div class="form-group {{ $errors->has('role') ? 'has-error' : '' }}">
+                {!! Form::label('role') !!}
+                @if ($user->exists && ($user->id == config('cms.default_user_id') || isset($hideRoleDropdown)))
+                    {!! Form::hidden('role', $user->role->first()->id) !!}
+                    <p class="form-control-static">{{ $user->role->first()->display_name }}</p>
+                @else
+                    {!! Form::select('role', App\Role::pluck('display_name', 'id'),                                                                        $user->exists ? $user->role->first()->id : null, ['class' => 'form-control', 'placeholder' => 'Choose a role']) !!}
+                @endif
+    
+                @if($errors->has('role'))
+                    <span class="help-block">{{ $errors->first('role') }}</span>
+                @endif
+            </div>
             <div class="form-group">
               <label for="bio">Bio</label>
               <textarea name="bio" id="bio"  rows="5" class="form-control">{{ $user->bio }}</textarea>

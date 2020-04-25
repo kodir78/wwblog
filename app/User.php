@@ -11,7 +11,7 @@ use Laratrust\Traits\LaratrustUserTrait;
 
 class User extends Authenticatable
 {
-    use LaratrustUserTrait; // add this trait to your user model
+   // use LaratrustUserTrait; // add this trait to your user model
     use Notifiable;
     
     /**
@@ -21,7 +21,7 @@ class User extends Authenticatable
     */
     protected $fillable = [
         'name', 'email', 'password', 'user_login', 'slug', 'user_url',
-        'user_phone', 'avatar', 'bio',
+        'user_phone', 'avatar', 'bio','role',
         'status', 'display_name',
     ];
     
@@ -71,4 +71,5 @@ class User extends Authenticatable
     {
         if (! empty($value)) $this->attributes['password'] = crypt($value, '');
     }
+
 }

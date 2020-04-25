@@ -18,7 +18,7 @@ class Post extends Model
     //protected $guardian = [];
     protected $fillable = [
         'author_id','title', 'slug', 'category_id','excerpt',
-        'body','image', 'published_at',
+        'body','image', 'published_at', 
     ];
     
     public function getImageUrlAttribute($value)

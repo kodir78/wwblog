@@ -79,7 +79,7 @@ Route::group(['middleware' => 'auth'], function()
     ]);
     Route::resource('/backend/users', 'Backend\UserController');
     Route::get('/backend/posts/trash', 'Backend\PostController@trash')->name('posts.trash');
-    //Route::resource('/backend/tags', 'Backend\TagsController');
+    Route::resource('/backend/tags', 'Backend\TagsController');
     // Route::resource('/backend/pegawai', 'Backend\PegawaiController');
     // Route::resource('/backend/sliders', 'Backend\SliderController');
 });
