@@ -6862,6 +6862,83 @@
         "homepage": "https://github.com/tijsverkoyen/CssToInlineStyles"
     },
     {
+        "name": "unisharp/laravel-filemanager",
+        "version": "v2.0.1",
+        "version_normalized": "2.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/UniSharp/laravel-filemanager.git",
+            "reference": "241100bf406aced0ad682d5d1eafb9614b3d1bf6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/UniSharp/laravel-filemanager/zipball/241100bf406aced0ad682d5d1eafb9614b3d1bf6",
+            "reference": "241100bf406aced0ad682d5d1eafb9614b3d1bf6",
+            "shasum": ""
+        },
+        "require": {
+            "ext-exif": "*",
+            "ext-fileinfo": "*",
+            "illuminate/config": "5.4.* || 5.5.* || 5.6.* || 5.7.* || 5.8.* || ^6.0 || ^7.0",
+            "illuminate/container": "5.4.* || 5.5.* || 5.6.* || 5.7.* || 5.8.* || ^6.0 || ^7.0",
+            "illuminate/filesystem": "5.4.* || 5.5.* || 5.6.* || 5.7.* || 5.8.* || ^6.0 || ^7.0",
+            "illuminate/http": "5.4.* || 5.5.* || 5.6.* || 5.7.* || 5.8.* || ^6.0 || ^7.0",
+            "illuminate/support": "5.4.* || 5.5.* || 5.6.* || 5.7.* || 5.8.* || ^6.0 || ^7.0",
+            "intervention/image": "2.*",
+            "php": ">=7.2.0"
+        },
+        "require-dev": {
+            "mockery/mockery": "^0.9.9",
+            "phpunit/phpunit": "^6.2",
+            "squizlabs/php_codesniffer": "^3.1"
+        },
+        "suggest": {
+            "ext-gd": "to use GD library based image processing.",
+            "ext-imagick": "to use Imagick based image processing."
+        },
+        "time": "2020-04-17T04:27:11+00:00",
+        "type": "library",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "UniSharp\\LaravelFilemanager\\LaravelFilemanagerServiceProvider"
+                ],
+                "aliases": []
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "UniSharp\\LaravelFilemanager\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Trevor Sawler",
+                "email": "trevor.sawler@gmail.com"
+            },
+            {
+                "name": "UniSharp Ltd.",
+                "email": "opensource@unisharp.com"
+            }
+        ],
+        "description": "A file upload/editor intended for use with Laravel 5 to 6 and CKEditor / TinyMCE",
+        "keywords": [
+            "CKEditor",
+            "file",
+            "filemanager",
+            "image",
+            "laravel",
+            "manager",
+            "tinymce",
+            "upload"
+        ]
+    },
+    {
         "name": "vlucas/phpdotenv",
         "version": "v3.6.3",
         "version_normalized": "3.6.3.0",

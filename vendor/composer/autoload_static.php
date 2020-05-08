@@ -114,6 +114,10 @@ class ComposerStaticInit5dbecb24e2cc734ad2753e8532fa5ebd
             'Whoops\\' => 7,
             'Webmozart\\Assert\\' => 17,
         ),
+        'U' => 
+        array (
+            'UniSharp\\LaravelFilemanager\\' => 28,
+        ),
         'T' => 
         array (
             'Traitor\\' => 8,
@@ -276,6 +280,10 @@ class ComposerStaticInit5dbecb24e2cc734ad2753e8532fa5ebd
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'UniSharp\\LaravelFilemanager\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src',
         ),
         'Traitor\\' => 
         array (
@@ -657,7 +665,7 @@ class ComposerStaticInit5dbecb24e2cc734ad2753e8532fa5ebd
         'App\\Http\\Controllers\\Backend\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/HomeController.php',
         'App\\Http\\Controllers\\Backend\\PegawaiController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/PegawaiController.php',
         'App\\Http\\Controllers\\Backend\\PostController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/PostController.php',
-        'App\\Http\\Controllers\\Backend\\TagsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/TagsController.php',
+        'App\\Http\\Controllers\\Backend\\TagController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/TagController.php',
         'App\\Http\\Controllers\\Backend\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/UserController.php',
         'App\\Http\\Controllers\\BlogController' => __DIR__ . '/../..' . '/app/Http/Controllers/BlogController.php',
         'App\\Http\\Controllers\\CommentsController' => __DIR__ . '/../..' . '/app/Http/Controllers/CommentsController.php',
@@ -6224,6 +6232,42 @@ class ComposerStaticInit5dbecb24e2cc734ad2753e8532fa5ebd
         'Traitor\\Handlers\\Handler' => __DIR__ . '/..' . '/kkszymanowski/traitor/src/Handlers/Handler.php',
         'Traitor\\TraitUseAdder' => __DIR__ . '/..' . '/kkszymanowski/traitor/src/TraitUseAdder.php',
         'Traitor\\Traitor' => __DIR__ . '/..' . '/kkszymanowski/traitor/src/Traitor.php',
+        'UniSharp\\LaravelFilemanager\\Controllers\\Controller' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Controllers/Controller.php',
+        'UniSharp\\LaravelFilemanager\\Controllers\\CropController' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Controllers/CropController.php',
+        'UniSharp\\LaravelFilemanager\\Controllers\\DeleteController' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Controllers/DeleteController.php',
+        'UniSharp\\LaravelFilemanager\\Controllers\\DemoController' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Controllers/DemoController.php',
+        'UniSharp\\LaravelFilemanager\\Controllers\\DownloadController' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Controllers/DownloadController.php',
+        'UniSharp\\LaravelFilemanager\\Controllers\\FolderController' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Controllers/FolderController.php',
+        'UniSharp\\LaravelFilemanager\\Controllers\\ItemsController' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Controllers/ItemsController.php',
+        'UniSharp\\LaravelFilemanager\\Controllers\\LfmController' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Controllers/LfmController.php',
+        'UniSharp\\LaravelFilemanager\\Controllers\\RedirectController' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Controllers/RedirectController.php',
+        'UniSharp\\LaravelFilemanager\\Controllers\\RenameController' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Controllers/RenameController.php',
+        'UniSharp\\LaravelFilemanager\\Controllers\\ResizeController' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Controllers/ResizeController.php',
+        'UniSharp\\LaravelFilemanager\\Controllers\\UploadController' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Controllers/UploadController.php',
+        'UniSharp\\LaravelFilemanager\\Events\\FileIsMoving' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Events/FileIsMoving.php',
+        'UniSharp\\LaravelFilemanager\\Events\\FileWasMoving' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Events/FileWasMoving.php',
+        'UniSharp\\LaravelFilemanager\\Events\\FolderIsMoving' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Events/FolderIsMoving.php',
+        'UniSharp\\LaravelFilemanager\\Events\\FolderIsRenaming' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Events/FolderIsRenaming.php',
+        'UniSharp\\LaravelFilemanager\\Events\\FolderWasMoving' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Events/FolderWasMoving.php',
+        'UniSharp\\LaravelFilemanager\\Events\\FolderWasRenamed' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Events/FolderWasRenamed.php',
+        'UniSharp\\LaravelFilemanager\\Events\\ImageIsCropping' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Events/ImageIsCropping.php',
+        'UniSharp\\LaravelFilemanager\\Events\\ImageIsDeleting' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Events/ImageIsDeleting.php',
+        'UniSharp\\LaravelFilemanager\\Events\\ImageIsRenaming' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Events/ImageIsRenaming.php',
+        'UniSharp\\LaravelFilemanager\\Events\\ImageIsResizing' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Events/ImageIsResizing.php',
+        'UniSharp\\LaravelFilemanager\\Events\\ImageIsUploading' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Events/ImageIsUploading.php',
+        'UniSharp\\LaravelFilemanager\\Events\\ImageWasCropped' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Events/ImageWasCropped.php',
+        'UniSharp\\LaravelFilemanager\\Events\\ImageWasDeleted' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Events/ImageWasDeleted.php',
+        'UniSharp\\LaravelFilemanager\\Events\\ImageWasRenamed' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Events/ImageWasRenamed.php',
+        'UniSharp\\LaravelFilemanager\\Events\\ImageWasResized' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Events/ImageWasResized.php',
+        'UniSharp\\LaravelFilemanager\\Events\\ImageWasUploaded' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Events/ImageWasUploaded.php',
+        'UniSharp\\LaravelFilemanager\\Handlers\\ConfigHandler' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Handlers/ConfigHandler.php',
+        'UniSharp\\LaravelFilemanager\\LaravelFilemanagerServiceProvider' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/LaravelFilemanagerServiceProvider.php',
+        'UniSharp\\LaravelFilemanager\\Lfm' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Lfm.php',
+        'UniSharp\\LaravelFilemanager\\LfmItem' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/LfmItem.php',
+        'UniSharp\\LaravelFilemanager\\LfmPath' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/LfmPath.php',
+        'UniSharp\\LaravelFilemanager\\LfmStorageRepository' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/LfmStorageRepository.php',
+        'UniSharp\\LaravelFilemanager\\Middlewares\\CreateDefaultFolder' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Middlewares/CreateDefaultFolder.php',
+        'UniSharp\\LaravelFilemanager\\Middlewares\\MultiUser' => __DIR__ . '/..' . '/unisharp/laravel-filemanager/src/Middlewares/MultiUser.php',
         'UsersTableSeeder' => __DIR__ . '/../..' . '/database/seeds/UsersTableSeeder.php',
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',
         'Whoops\\Exception\\ErrorException' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Exception/ErrorException.php',

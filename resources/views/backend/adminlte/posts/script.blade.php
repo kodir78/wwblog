@@ -30,9 +30,6 @@
         
         // Summernote
         $('#excerpt').summernote()
-        $('#body').summernote({
-            height: "300px" 
-        })
         
         $('#summernote').summernote({
             height: "300px",
@@ -71,9 +68,11 @@
         // Replace the <textarea id="editor1"> with a CKEditor
             // instance, using default configuration.
             // CKEDITOR.replace( 'excerpt' );
-            CKEDITOR.replace( 'body_', {
+            CKEDITOR.replace( 'body', {
                 //extraPlugins: 'easyimage',
-                height: 400
+                height: 300,
+                filebrowserUploadUrl: "{{route('posts.image', ['_token' => csrf_token() ])}}",
+                filebrowserUploadMethod: 'form'
             });
             
             //Save Draft        

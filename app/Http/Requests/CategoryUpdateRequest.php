@@ -25,6 +25,7 @@ class CategoryUpdateRequest extends FormRequest
     {
         return [
             'title' => 'required|max:255|unique:categories,title,' .$this->route('category'),
+            'slug' => 'required|max:255|unique:categories,slug,' .$this->route('category'),
         ];
     }
 }

@@ -78,25 +78,6 @@
                 <!-- /.form-group -->
                 <!-- text input -->
                 <div class="form-group">
-                  <label for="email">Role</label>
-                  <div class="form-check">
-                    <input class="form-check-input {{$errors->first('role') ? "is-invalid" : ""}}" type="checkbox"  name="role[]" id="ADMIN" value="ADMIN">
-                    <label class="form-check-label" for="ADMIN">Admin</label>
-                  </div><div class="form-check">
-                    <input class="form-check-input {{$errors->first('role') ? "is-invalid" : ""}}" type="checkbox"  name="role[]" name="role[]" id="EDITOR" value="EDITOR">
-                    <label class="form-check-label" for="EDITOR">Editor</label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input {{$errors->first('role') ? "is-invalid" : ""}}" type="checkbox"  name="role[]" id="AUTHOR" value="AUTHOR">
-                    <label class="form-check-label" for="AUTHOR">Author</label>
-                  </div>
-                  <div class="invalid-feedback">
-                    {{$errors->first('role')}}
-                  </div>
-                </div>
-                <!-- /.form-group -->
-                <!-- text input -->
-                <div class="form-group">
                   <label for="password">Password</label>
                   <input id="password" name="password" type="password" class="form-control @error('password') is-invalid @enderror">
                   @error('password')
@@ -118,6 +99,19 @@
                   @enderror
                 </div>
                 <!-- /.form-group -->
+                <div class="form-group {{ $errors->has('role') ? 'has-error' : '' }}">
+                  {!! Form::label('role') !!}
+                  @if ($user->exists && ($user->id == config('cms.default_user_id') || isset($hideRoleDropdown)))
+                  {!! Form::hidden('role', $user->roles->first()->id) !!}
+                  <p class="form-control-static">{{ $user->roles->first()->display_name }}</p>
+                  @else
+                  {!! Form::select('role', App\Role::pluck('display_name', 'id'), $user->exists ? $user->roles->first()->id : null, ['class' => 'form-control', 'placeholder' => 'Choose a role']) !!}
+                  @endif
+                  
+                  @if($errors->has('role'))
+                  <span class="help-block">{{ $errors->first('role') }}</span>
+                  @endif
+                </div>
                 <div class="form-group">
                   {!! Form::label('bio') !!}
                   {!! Form::textarea('bio', null, ['rows' => 5, 'class' => 'form-control']) !!}

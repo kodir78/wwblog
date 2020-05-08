@@ -69,6 +69,8 @@ Route::group(['middleware' => 'auth'], function()
         'uses' => 'Backend\PostController@restore',
         'as' => 'posts.restore'
         ]);
+    
+    Route::post('/backend/posts/uploadImage', 'Backend\PostController@uploadImage')->name('posts.image');
     Route::delete('/backend/posts/{post}/forceDestroy', 'Backend\PostController@forceDestroy')->name('posts.forceDestroy');
     Route::resource('/backend/posts', 'Backend\PostController');
 
@@ -79,7 +81,7 @@ Route::group(['middleware' => 'auth'], function()
     ]);
     Route::resource('/backend/users', 'Backend\UserController');
     Route::get('/backend/posts/trash', 'Backend\PostController@trash')->name('posts.trash');
-    Route::resource('/backend/tags', 'Backend\TagsController');
+    Route::resource('/backend/tags', 'Backend\TagController');
     // Route::resource('/backend/pegawai', 'Backend\PegawaiController');
     // Route::resource('/backend/sliders', 'Backend\SliderController');
 });

@@ -11,6 +11,13 @@ use App\User;
 
 class UserController extends BackendController
 {
+    protected $uploadPath;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->uploadPath = public_path(config('cms.image.directory'));
+    }
     /**
     * Display a listing of the resource.
     *
@@ -43,11 +50,20 @@ class UserController extends BackendController
     */
     public function store(Requests\UserStoreRequest $request)
     {
+        // versi azzam
+        $new_user = new \App\User;
+        $new_user->name = $request->get('name');
+        $new_user->slug = $request->get('slug');
+        $new_user->role = json_encode($request->get('role'));
+        $new_user->email = $request->get('email');
+        $new_user->password = \Hash::make($request->get('password'));
         
-        $user =  User::create($request->all());
+        $new_user->save();
+        // versi eding
+        // $user =  User::create($request->all());
         
         // simpan data roles ke roles_user dengan "attach"
-        $user->roles()->attach($request->role);
+        //$user->roles()->attach($request->role);
         
         // $user->attachRole($request->role);
         
@@ -90,11 +106,11 @@ class UserController extends BackendController
         $user = User::findOrFail($id);
         $user->update($request->all());
         
-        $user->detachRoles();
+        // $user->detachRoles();
         //$user->attachRole($request->role);
         
         // Update data roles ke roles_user dengan "sync"
-        $user->roles()->sync($request->role);
+        // $user->roles()->sync($request->role);
         
         return redirect('/backend/users')->with('message','User was update successfully');
     }

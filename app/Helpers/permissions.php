@@ -25,9 +25,10 @@ function check_user_permissions($request, $actionName = NULL, $id = NULL)
 
     // pada classmapping ini sesuaikan dengan route dan nama controller
     $classesMap = [
-        'Posts'       => 'posts',
-        'Users'      => 'user',
-        'Categories' => 'category'
+        'Posts'        => 'posts',
+        'Users'        => 'user',
+        'Categories'   => 'category',
+        'Tags'         => 'tag'
     ];
 
     foreach ($crudPermissionsMap as $permission => $methods)

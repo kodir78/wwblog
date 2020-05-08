@@ -7,7 +7,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
-class TagsController extends BackendController
+class TagController extends BackendController
 {
     protected $limit = 5;
     /**

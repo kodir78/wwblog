@@ -62,7 +62,7 @@
                             
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body table-responsive p-0">
+                        <div class="card-body">
                             
                             @include('backend.adminlte.partials.message')
 

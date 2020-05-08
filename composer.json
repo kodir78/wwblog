@@ -19,6 +19,7 @@
         "realrashid/sweet-alert": "^3.1",
         "santigarcor/laratrust": "5.2.*",
         "symfony/translation": "4.3.8",
+        "unisharp/laravel-filemanager": "^2.0",
         "yajra/laravel-datatables": "1.5",
         "yajra/laravel-datatables-oracle": "~9.0"
     },

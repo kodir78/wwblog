@@ -117,7 +117,7 @@
               <div class="card-body">
                 <!-- Minimal style -->
                 <div class="form-group @error('category_id') is-invalid @enderror ">
-                  {!! Form::select('category_id', App\Category::pluck('title', 'id'), null, ['class' => 'form-control ', 'placeholder' => 'Choose category']) !!}
+                  {!! Form::select('category_id', App\Category::pluck('title', 'id'), null, ['class' => 'form-control select2bs4', 'placeholder' => 'Choose category']) !!}
                   {{-- @if($errors->has('category_id'))
                   <span class="help-block">{{ $errors->first('category_id') }}</span>
                   @endif --}}
