@@ -139,12 +139,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
-        Intervention\Image\ImageServiceProvider::class,
-        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
-        Yajra\DataTables\DataTablesServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
-        // GrahamCampbell\Markdown\MarkdownServiceProvider,
-
+        
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -171,6 +166,12 @@ return [
         /*
          * Package Service Providers...
          */
+        Intervention\Image\ImageServiceProvider::class,
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        // GrahamCampbell\Markdown\MarkdownServiceProvider,
 
         /*
          * Application Service Providers...
@@ -196,12 +197,6 @@ return [
     */
 
     'aliases' => [
-
-        'Image' => Intervention\Image\Facades\Image::class,
-        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
-        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
-        'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
 
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
@@ -238,6 +233,16 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+          /*
+         * Package Service Providers...
+         */
+        'Image' => Intervention\Image\Facades\Image::class,
+        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         
     ],
 
