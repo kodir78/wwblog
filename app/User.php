@@ -11,7 +11,7 @@ use Laratrust\Traits\LaratrustUserTrait;
 
 class User extends Authenticatable
 {
-   // use LaratrustUserTrait; // add this trait to your user model
+   use LaratrustUserTrait; // add this trait to your user model
     use Notifiable;
     
     /**
