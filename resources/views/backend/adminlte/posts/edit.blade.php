@@ -4,8 +4,6 @@
 <!-- Start styles Libraies -->
 <!-- daterange picker -->
 <link rel="stylesheet" href="/assets/backend/adminlte/plugins/daterangepicker/daterangepicker.css">
-<!-- iCheck for checkboxes and radio inputs -->
-<link rel="stylesheet" href="/assets/backend/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 <!-- Tempusdominus Bbootstrap 4 -->
 <link rel="stylesheet" href="/assets/backend/adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
 <!-- Select2 -->
@@ -115,7 +113,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <select class="form-control selectric {{$errors->first('category_id') ? "is-invalid": ""}}" name="category_id" id="category_id">
+                                    <select class="form-control select2bs4 {{$errors->first('category_id') ? "is-invalid": ""}}" name="category_id" id="category_id">
                                         <option value="" holder>Select Category</option>
                                         @foreach($category as $result)
                                         <option value="{{ $result->id }}"

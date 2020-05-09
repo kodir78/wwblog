@@ -1,24 +1,40 @@
 
-<script src="/assets/ckeditor/ckeditor.js"></script> 
+
 <!-- Summernote -->
 <script src="/assets/backend/adminlte/plugins/tag-editor/jquery.caret.min.js"></script>
 <script src="/assets/backend/adminlte/plugins/tag-editor/jquery.tag-editor.min.js"></script>
 
 <script type="text/javascript">
-    var options = {};
+    var tags = {};
     
     @if ($post->exists)
-    options = {
+    tags = {
         initialTags: {!! $post->tags_list !!}
     }
     @endif
     
-    $('input[name=post_tags]').tagEditor(options);
+    $('input[name=post_tags]').tagEditor(tags);
 </script>
 
-<script src="/assets/backend/adminlte/plugins/summernote/summernote-bs4.min.js"></script>   
+<script src="/assets/backend/adminlte/plugins/summernote/summernote-bs4.min.js"></script> 
+<script src="/assets/backend/ckeditor/ckeditor.js"></script> 
+{{-- <script src="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js"></script> --}}
 <script>
+    
     $(function () {
+        //Initialize CKEDITOR Elements
+        //CKEDITOR.replace('excerpt', {
+           // height: 100
+        //});
+        // config CKS Editor With Laravel/FileManager
+        CKEDITOR.replace('body', {
+            height: 400,
+            filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+            filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+            filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+            filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+        });
+        
         //Initialize Select2 Elements
         $('.select2').select2()
         
@@ -30,18 +46,7 @@
         
         // Summernote
         $('#excerpt').summernote()
-        
-        $('#summernote').summernote({
-            height: "300px",
-            callbacks: {
-                onImageUpload: function(image) {
-                    uploadImage(image[0]);
-                },
-                onMediaDelete: function(target) {
-                    deleteImage(target[0].src);
-                }
-            }
-        });
+        //$('#body').summernote()
         
         //DateTimepicker
         $('#datetimepicker').datetimepicker({
@@ -65,22 +70,13 @@
             
             slugInput.val(theSlug);
         });
-        // Replace the <textarea id="editor1"> with a CKEditor
-            // instance, using default configuration.
-            // CKEDITOR.replace( 'excerpt' );
-            CKEDITOR.replace( 'body', {
-                //extraPlugins: 'easyimage',
-                height: 300,
-                filebrowserUploadUrl: "{{route('posts.image', ['_token' => csrf_token() ])}}",
-                filebrowserUploadMethod: 'form'
-            });
-            
-            //Save Draft        
-            $('#draft-btn').click(function(e) {
-                e.preventDefault();
-                $('#published_at').val("");
-                $('#post-form').submit();
-            });
-        })
         
-    </script>
+        //Save Draft        
+        $('#draft-btn').click(function(e) {
+            e.preventDefault();
+            $('#published_at').val("");
+            $('#post-form').submit();
+        });
+    })
+    
+</script>

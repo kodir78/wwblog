@@ -19,9 +19,9 @@ return [
     |
     */
     // sbelumnya
-    //'use_morph_map' => false,
+    'use_morph_map' => false,
     // sedudah di edit
-    'use_morph_map' => true,
+    //'use_morph_map' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -222,6 +222,7 @@ return [
         /**
          * Define if the laratrust middleware are registered automatically in the service provider
          */
+        // 'register' => false,
         'register' => true,
 
         /**

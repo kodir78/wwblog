@@ -85,4 +85,8 @@ Route::group(['middleware' => 'auth'], function()
     // Route::resource('/backend/pegawai', 'Backend\PegawaiController');
     // Route::resource('/backend/sliders', 'Backend\SliderController');
 });
+
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 // End Route Bagian Backend    

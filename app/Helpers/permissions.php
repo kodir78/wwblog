@@ -23,12 +23,10 @@ function check_user_permissions($request, $actionName = NULL, $id = NULL)
         'crud' => ['create', 'store', 'edit', 'update', 'destroy', 'restore', 'forceDestroy', 'index', 'view']
     ];
 
-    // pada classmapping ini sesuaikan dengan route dan nama controller
     $classesMap = [
-        'Posts'        => 'posts',
-        'Users'        => 'user',
-        'Categories'   => 'category',
-        'Tags'         => 'tag'
+        'Posts'       => 'posts',
+        'Users'      => 'user',
+        'Categories' => 'category'
     ];
 
     foreach ($crudPermissionsMap as $permission => $methods)

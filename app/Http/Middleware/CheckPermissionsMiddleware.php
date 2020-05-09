@@ -16,7 +16,7 @@ class CheckPermissionsMiddleware
     public function handle($request, Closure $next)
     {
         if ( ! check_user_permissions($request)) {
-            abort(403, "Forbidden access!");
+            abort(403, "Forbidden fff access!");
         }
         return $next($request);
     }
