@@ -18,7 +18,6 @@
 
 <script src="/assets/backend/adminlte/plugins/summernote/summernote-bs4.min.js"></script> 
 <script src="/assets/backend/ckeditor/ckeditor.js"></script> 
-{{-- <script src="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js"></script> --}}
 <script>
     
     $(function () {
