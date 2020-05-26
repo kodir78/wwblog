@@ -15,7 +15,7 @@
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
+    {{-- <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
@@ -24,19 +24,33 @@
           </button>
         </div>
       </div>
-    </form>
+    </form> --}}
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <!-- Messages Dropdown Menu -->
-      <li class="nav-item">
-        <form action="{{route("logout")}}" method="POST">
-          @csrf
-          <button class="dropdown-item nav-link btn btn-default" style="cursor:pointer"><i class="fas fa-sign-out-alt text-danger"></i> <strong>Logout</strong></button>
-      </form>
+      <!-- User Dropdown Menu -->
+      <li class="nav-item dropdown dropdown-menu-sm">
+        <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
+          <i class="nav-icon fas fa-user"></i>&nbsp; {{ $currentUser->name }}
+        </a>
+        <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow dropdown-menu-sm dropdown-menu-right">
+          <li>
+            <a href="{{ url('/edit-account') }}" class="dropdown-item"><i class="nav-icon fas fa-edit"></i> Change Profile </a>
+          </li>
+          <li><a href="#" class="dropdown-item"><i class="nav-icon fas fa-lock"></i> Change Password</a></li>
+          <li class="dropdown-divider"></li>
+          <li>
+            <a href="{{ route('logout') }}" class="dropdown-item"
+             onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+              <i class="nav-icon fas fa-sign-out-alt text-danger"></i> {{ __('Sign out') }}
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+          </form>
+          </li>
+        </ul>
       </li>
-      <!-- Notifications Dropdown Menu -->
-      
       {{-- <li class="nav-item">
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
           <i class="fas fa-th-large"></i>

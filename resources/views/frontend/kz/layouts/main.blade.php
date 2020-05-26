@@ -5,79 +5,60 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="keywords" content="SITE KEYWORDS HERE" />
+    <meta name="keywords" content="zaelani.id" />
     <meta name="description" content="">
-    <meta name='copyright' content='Trendbiz'>
+    <meta name='copyright' content='zaelani.id'>
     
     <!-- Title Tag -->
     <title>@yield('title')</title>
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/uploads/images/logo/favicon.png">	
+    <link rel="icon" type="image/png" href="{{ asset('/uploads/images/logo/favicon.png') }}">	
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
     
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/assets/frontend/kz/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('/assets/frontend/kz/bootstrap-4.5.0/css/bootstrap.min.css') }}">
     <!-- Animate CSS -->
-    <link rel="stylesheet" href="/assets/frontend/kz/css/animate.min.css">
+    <link rel="stylesheet" href="{{ asset('/assets/frontend/kz/css/animate.min.css') }}">
     <!-- Animate Text CSS -->
-    <link rel="stylesheet" href="/assets/frontend/kz/css/animate-text.css">
+    <link rel="stylesheet" href="{{ asset('/assets/frontend/kz/css/animate-text.css') }}">
     <!-- Icofont CSS -->
-    <link rel="stylesheet" href="/assets/frontend/kz/css/icofont.css">
+    <link rel="stylesheet" href="{{ asset('/assets/frontend/kz/css/icofont.css') }}">
     <!-- Font Awesome CSS -->
-    <link rel="stylesheet" href="/assets/frontend/kz/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('/assets/frontend/kz/css/font-awesome.min.css') }}">
     <!-- Jquery Ui CSS -->
-    <link rel="stylesheet" href="/assets/frontend/kz/css/jquery-ui.css">
+    <link rel="stylesheet" href="{{ asset('/assets/frontend/kz/css/jquery-ui.css') }}">
     <!-- Flex Slider CSS -->
-    <link rel="stylesheet" href="/assets/frontend/kz/css/flex-slider.min.css">
+    <link rel="stylesheet" href="{{ asset('/assets/frontend/kz/css/flex-slider.min.css') }}">
     <!-- Dzs Parallaxer CSS -->
-    <link rel="stylesheet" href="/assets/frontend/kz/css/dzsparallaxer.min.css">
+    <link rel="stylesheet" href="{{ asset('/assets/frontend/kz/css/dzsparallaxer.min.css') }}">
     <!-- Owl Carousel CSS -->
-    <link rel="stylesheet" href="/assets/frontend/kz/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="{{ asset('/assets/frontend/kz/css/owl.carousel.min.css') }}">
     <!-- Slick Nav CSS -->
-    <link rel="stylesheet" href="/assets/frontend/kz/css/slicknav.min.css">
+    <link rel="stylesheet" href="{{ asset('/assets/frontend/kz/css/slicknav.min.css') }}">
     <!-- Youtube Player CSS -->
-    <link rel="stylesheet" href="/assets/frontend/kz/css/ytplayer.min.css">
+    <link rel="stylesheet" href="{{ asset('/assets/frontend/kz/css/ytplayer.min.css') }}">
     <!-- FancyBox CSS -->
-    <link rel="stylesheet" href="/assets/frontend/kz/css/fancybox.min.css">
+    <link rel="stylesheet" href="{{ asset('/assets/frontend/kz/css/fancybox.min.css') }}">
     <!-- Nice Select CSS -->
-    <link rel="stylesheet" href="/assets/frontend/kz/css/niceselect.css">
+    <link rel="stylesheet" href="{{ asset('/assets/frontend/kz/css/niceselect.css') }}">
     <!-- Cube Portfolio CSS -->
-    <link rel="stylesheet" href="/assets/frontend/kz/css/cubeportfolio.min.css">
+    <link rel="stylesheet" href="{{ asset('/assets/frontend/kz/css/cubeportfolio.min.css') }}">
     <!-- Magnific Popup CSS -->
-    <link rel="stylesheet" href="/assets/frontend/kz/css/magnific-popup.css">
+    <link rel="stylesheet" href="{{ asset('/assets/frontend/kz/css/magnific-popup.css') }}">
     
-    <!-- Trendbiz CSS -->
-    <link rel="stylesheet" href="/assets/frontend/kz/css/custom/style-orange.css">
-    {{-- <link rel="stylesheet" href="/assets/frontend/kz/css/custom/style-blue.css"> --}}
-    <link rel="stylesheet" href="/assets/frontend/kz/css/responsive-orange.css">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="{{ asset('/assets/frontend/kz/bootstrap-4.5.0/css/custom/style-orange.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/frontend/kz/bootstrap-4.5.0/css/responsive-orange.css') }}">
+    {{-- <link rel="stylesheet" href="/assets/frontend/kz/bootstrap-4.5.0/css/custom/style-blue.css"> --}}
+    {{-- <link rel="stylesheet" href="/assets/frontend/kz/bootstrap-4.5.0/css/responsive-blue.css"> --}}
     
-    <!-- Trendbiz Color -->
-    {{-- <link rel="stylesheet" href="/assets/frontend/kz/css/skin/skin1.css"> --}}
-    {{-- Green --}}
-    {{-- <link rel="stylesheet" href="/assets/frontend/kz/css/skin/skin2.css"> --}}
-    <!--<link rel="stylesheet" href="/assets/frontend/kz/css/skin/skin3.css">-->
-    <!--<link rel="stylesheet" href="/assets/frontend/kz/css/skin/skin4.css">-->
-    <!--<link rel="stylesheet" href="/assets/frontend/kz/css/skin/skin5.css">-->
-    
-    {{-- <link rel="stylesheet" href="/assets/frontend/kz/css/skin/skin7.css"> --}}
-    <!--<link rel="stylesheet" href="/assets/frontend/kz/css/skin/skin8.css">-->
-    <!--<link rel="stylesheet" href="/assets/frontend/kz/css/skin/skin9.css">-->
-    <!--<link rel="stylesheet" href="/assets/frontend/kz/css/skin/skin10.css">-->
-    {{-- <link rel="stylesheet" href="/assets/frontend/kz/css/skin/skin11.css"> --}}
-    {{-- <link rel="stylesheet" href="/assets/frontend/kz/css/skin/skin12.css"> --}}
+    <!-- SKin Color -->
     {{-- Blue --}}
-    {{-- <link rel="stylesheet" href="/assets/frontend/kz/css/skin/skin-blue.css"> --}}
+    {{-- <link rel="stylesheet" href="/assets/frontend/kz/bootstrap-4.5.0/css/skin/skin-blue.css"> --}}
     {{-- Orange --}}
-    <link rel="stylesheet" href="/assets/frontend/kz/css/skin/skin-orange.css">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <link rel="stylesheet" href="{{ asset('/assets/frontend/kz/bootstrap-4.5.0/css/skin/skin-orange.css') }}">
     
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
     </head>
     <body class="box-bg">
         <div class="boxed-layout">
@@ -95,7 +76,7 @@
                                 <!-- About Widget -->
                                 <div class="single-widget about">
                                      {{-- <a href="index.html"><img src="/uploads/images/logo/logo.png" alt="logo"></a> --}}
-                                    <p>Terus belajar untuk memberikan yang terbaik buat Keluarga, Masyarakat serta sahabat-sahabat<a href="#">#<i class="icofont icofont-caret-right"></i></a></p>	
+                                    <p>Terus belajar untuk memberikan yang terbaik buat Keluarga<a href="#">#<i class="icofont icofont-caret-right"></i></a></p>	
                                     <ul class="social">
                                         <li><a href="#"><i class="icofont icofont-social-facebook"></i></a></li>
                                         <li><a href="#"><i class="icofont icofont-social-twitter"></i></a></li>
@@ -149,7 +130,7 @@
                                     <p>Kodir Zaelani</p>
                                     <ul class="list">
                                         {{-- <li><i class="icofont icofont-phone"></i>+990123-456-789</li> --}}
-                                        <li><i class="icofont icofont-ui-email"></i><a href="mailto:kodir.petani@gmail.com">kodir.petani@gmail.com</a></li>
+                                        <li><i class="icofont icofont-ui-email"></i><a href="mailto:kodir.zaelani78@gmail.com">kodir.zaelani78@gmail.com</a></li>
                                         <li><i class="icofont icofont-location-arrow"></i>Samarinda, Kalimantan Timur, Indonesia</li>
                                     </ul>	
                                 </div>
@@ -163,8 +144,8 @@
                         <div class="row">
                             <div class="col-12">
                                 <!-- Copyright -->
-                                <div class="copyright">
-                                    <p>&copy; All Right Reserved. <a href="#">zaelani.id</a></p>
+                                <div class="copyright text-left">
+                                    <p>&copy; 2019 - 2020 All Right Reserved <a href="/" style="box-decoration: none">zaelani.id</a> - Created by: <a href="#">Kodir Zaelani</a></p>
                                 </div>
                                 <!--/ End Copyright -->
                             </div>
@@ -175,21 +156,21 @@
             <!--/ End footer -->
             
             <!-- Jquery JS -->
-            <script src="/assets/frontend/kz/js/jquery.min.js"></script>
-            <script src="/assets/frontend/kz/js/jquery-migrate.min.js"></script>
-            <script src="/assets/frontend/kz/js/jquery-ui.min.js"></script>
+            <script src="{{ asset('/assets/frontend/kz/js/jquery.min.js') }}"></script>
+            <script src="{{ asset('/assets/frontend/kz/js/jquery-migrate.min.js') }}"></script>
+            <script src="{{ asset('/assets/frontend/kz/js/jquery-ui.min.js') }}"></script>
             <!-- Bootstrap JS -->
-            <script src="/assets/frontend/kz/js/popper.min.js"></script>
-            <script src="/assets/frontend/kz/js/bootstrap.min.js"></script>
+            <script src="{{ asset('/assets/frontend/kz/js/popper.min.js') }}"></script>
+            <script src="{{ asset('/assets/frontend/kz/bootstrap-4.5.0/js/bootstrap.min.js') }}"></script>
             <!-- Modernizer JS -->
-            <script src="/assets/frontend/kz/js/modernizr.min.js"></script>
+            <script src="{{ asset('/assets/frontend/kz/js/modernizr.min.js') }}"></script>
             <!-- Particles JS -->
-            {{-- <script src="/assets/frontend/kz/js/particles.min.js"></script> --}}
-            {{-- <script src="/assets/frontend/kz/js/particle-active.js"></script> --}}
+            {{-- <script src="{{ asset('/assets/frontend/kz/js/particles.min.js') }}"></script> --}}
+            {{-- <script src="{{ asset('/assets/frontend/kz/js/particle-active.js') }}"></script> --}}
             <!-- Theme Plugins JS -->
-            <script src="/assets/frontend/kz/js/theme-plugins.js"></script>
+            <script src="{{ asset('/assets/frontend/kz/js/theme-plugins.js') }}"></script>
             <!-- Main JS -->
-            <script src="/assets/frontend/kz/js/main.js"></script>
+            <script src="{{ asset('/assets/frontend/kz/js/main.js') }}"></script>
         </div>
     </body>
     </html>

@@ -5,17 +5,21 @@
             <div class="row">
                 <div class="col-lg-7 col-12">
                     <!-- Top Contact -->
-                    {{-- <div class="top-contact">
+                    <div class="top-contact">
                         <div class="single-contact">
-                            <p><i class="icofont icofont-clock-time"></i> Date</p>
+                            <p><i class="icofont icofont-clock-time"></i> 
+                                @php
+                                  echo now();
+                                @endphp
+                            </p>
+                        </div>
+                        {{-- <div class="single-contact">
+                            <p><i class="icofont icofont-phone"></i>+62-541-</p>
                         </div>
                         <div class="single-contact">
-                            <p><i class="icofont icofont-phone"></i>+990123-456-789</p>
-                        </div>
-                        <div class="single-contact">
-                            <p><a href="mailto:info@yourwebsite.com"><i class="icofont icofont-ui-email"></i>info@yourwebsite.com</a></p>
-                        </div>
-                    </div> --}}
+                            <p><a href="mailto:admin@smpn1samarinda.sch.id"><i class="icofont icofont-ui-email"></i>admin@smpn1samarinda.sch.id</a></p>
+                        </div> --}}
+                    </div>
                     <!--/ End Top contact -->
                 </div>
                 <div class="col-lg-5 col-12">
@@ -44,7 +48,7 @@
                 <div class="col-lg-3 col-md-2 col-12">
                     <!-- Logo -->
                     <div class="logo">
-                        {{-- <a href="index.html"><img src="/uploads/images/logo/logo.png" alt="logo"></a> --}}
+                        <a href="/"><img src="{{ asset('/uploads/images/logo/logo.png') }}" alt="logo"></a>
                     </div>
                     <!--/ End Logo -->
                     <div class="mobile-nav"></div>
@@ -56,7 +60,7 @@
                             <div class="navbar-collapse">	
                                 <div class="nav-inner">	
                                     <ul class="nav main-menu navbar-nav">
-                                        <li><a href="{{ route('blog') }}">Home</a>
+                                        <li {{ Request::path() === 'blog' ? 'bg-primary' : '' }} ><a href="{{ route('blog') }}"><i class="fa fa-home"></i></a>
                                         </li>	
                                         <li><a href="{{ route('all') }}">Blog</a>
                                         </li>
@@ -79,7 +83,8 @@
                                             <div class="search-form overlay">
                                                 <!-- Search Form -->
                                                 <form class="form" action="{{ route('all') }}">
-                                                    <input type="text" id="term" value="{{ request('term') }}"  name="term" placeholder="Search something...">
+                                                    {{-- <label for="term">Silahkan ketik kata kunci pencarian pada berita</label> --}}
+                                                    <input type="text" id="term" value="{{ request('term') }}" required  name="term" placeholder="Search something for Posts ...">
                                                     <button type="submit"><i class="fa fa-search"></i></button>
                                                 </form>
                                                 <!--/ End Search Form -->
@@ -116,7 +121,7 @@
         <!-- Menu -->
         <ul class="nav navbar-nav">			
             <li><a href="{{ route('all') }}">Latest Post</a></li>				
-            <li><a href="contact.html">Contact</a></li>		
+            <li><a href="#">Contact</a></li>		
         </ul>	
         <!--/ End Menu -->
         <!-- Side Bottom -->
@@ -128,7 +133,7 @@
                 <li><a href="#"><i class="icofont icofont-social-youtube"></i></a></li>
                 <li><a href="#"><i class="icofont icofont-social-dribbble"></i></a></li>
             </ul>
-            <p class="copyright">©2020 <a href="#">zaelani.id</a></p>
+            <p class="copyright">© 2019 -2020 <a href="#">zaelani.id</a></p>
         </div>
         <!-- End Side Bottom -->
     </div>

@@ -56,7 +56,7 @@
               </li>
             </ul>
           </li>
-          @if (check_user_permissions(request(), "Categories@index"))
+          {{-- @if (check_user_permissions(request(), "Categories@index")) --}}
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
@@ -80,7 +80,7 @@
               </li>
             </ul>
           </li>
-          @endif
+          {{-- @endif --}}
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
@@ -98,7 +98,7 @@
               </li>
             </ul>
           </li>
-          @if (check_user_permissions(request(), "Users@index"))
+          {{-- @if (check_user_permissions(request(), "Users@index")) --}}
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
@@ -122,7 +122,7 @@
               </li>
             </ul>
           </li>
-          @endif
+          {{-- @endif --}}
           {{-- <li class="nav-item">
             <form action="{{route("logout")}}" method="POST">
               @csrf

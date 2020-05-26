@@ -146,13 +146,9 @@ class PostController extends BackendController
         // agar dapat menyimpan tags ke database, tampung create post ke variabel $newpost
         $newpost = $request->user()->posts()->create($data);
         
-    
-        //$newpost->createTags($data["post_tags"]);
-        
-        
         // simpan data tags ke posts_tags dengan "attach"
-        $newpost->tags()->attach($request->post_tags);
-        
+        $newpost->createTags($data['post_tags']);
+    
         Alert::success('Post succesfully created', 'Create Success');
         return redirect()->route('posts.index')->with('message','Post succesfully created');
     }
